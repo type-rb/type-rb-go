@@ -15,8 +15,13 @@ Prebuilt binaries and checksums are also available from
 the exact v0.5.0-alpha.1 version from Go source:
 
 ```sh
-go install github.com/type-rb/type-rb-go/cmd/trbg@v0.5.0-alpha.1
+git clone --branch v0.5.0-alpha.1 --single-branch https://github.com/type-rb/type-rb-go.git
+cd type-rb-go
+go install ./cmd/trbg
 ```
+
+Building from the checkout applies the exact Readline dependency override in
+`go.mod`.
 
 See the [TypeRB documentation](https://type-rb.github.io/docs/) for the
 language, configuration, official packages, and editor setup. Use `trbg` to
