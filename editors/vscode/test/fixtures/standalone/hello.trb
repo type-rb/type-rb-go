@@ -1,0 +1,6 @@
+import { greet } from "./helper.trb"
+
+def main()
+	puts(greet("Extension Host"))
+	return
+end
