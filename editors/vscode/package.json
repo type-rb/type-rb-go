@@ -1,0 +1,239 @@
+{
+	"name": "typerb",
+	"displayName": "TypeRB",
+	"description": "Language support for TypeRB",
+	"version": "0.4.1",
+	"preview": true,
+	"publisher": "type-rb",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/type-rb/type-rb.git",
+		"directory": "editors/vscode"
+	},
+	"engines": {
+		"vscode": "^1.130.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Formatters",
+		"Linters"
+	],
+	"keywords": [
+		"typerb",
+		"trb",
+		"language-server"
+	],
+	"activationEvents": [
+		"onLanguage:trb",
+		"onDebug:typerb",
+		"workspaceContains:trbconfig.jsonc"
+	],
+	"extensionKind": [
+		"workspace"
+	],
+	"main": "./dist/extension.js",
+	"files": [
+		"dist/extension.js",
+		"language-configuration.json",
+		"snippets/",
+		"syntaxes/",
+		"README.md",
+		"CHANGELOG.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"build": "esbuild extension.js --bundle --platform=node --format=cjs --external:vscode --outfile=dist/extension.js",
+		"build:production": "esbuild extension.js --bundle --minify --platform=node --format=cjs --external:vscode --outfile=dist/extension.js",
+		"test": "node --test test/*.test.js",
+		"test:integration:prepare": "npm run build && node test/integration/prepare.js",
+		"test:integration": "npm run test:integration:prepare && vscode-test --label stable",
+		"test:integration:insiders": "npm run test:integration:prepare && vscode-test --label insiders",
+		"test:integration:latest": "npm run test:integration:prepare && vscode-test --label stable && vscode-test --label insiders",
+		"package": "npm run build:production && vsce package --out dist/typerb.vsix"
+	},
+	"dependencies": {
+		"@vscode/debugadapter": "^1.68.0",
+		"vscode-languageclient": "10.1.0"
+	},
+	"devDependencies": {
+		"@vscode/test-cli": "^0.0.15",
+		"@vscode/test-electron": "^3.1.0",
+		"@vscode/vsce": "3.9.2",
+		"esbuild": "0.28.2"
+	},
+	"overrides": {
+		"diff": "8.0.3",
+		"serialize-javascript": "7.0.5"
+	},
+	"contributes": {
+		"breakpoints": [
+			{
+				"language": "trb"
+			}
+		],
+		"configurationDefaults": {
+			"[trb]": {
+				"editor.quickSuggestions": {
+					"other": "on",
+					"comments": "off",
+					"strings": "off"
+				},
+				"editor.suggestOnTriggerCharacters": true
+			}
+		},
+		"commands": [
+			{
+				"command": "typerb.runProject",
+				"title": "Run Project or File",
+				"category": "TypeRB",
+				"icon": "$(play)"
+			},
+			{
+				"command": "typerb.debugFile",
+				"title": "Debug File",
+				"category": "TypeRB",
+				"icon": "$(debug-alt)"
+			},
+			{
+				"command": "typerb.runTest",
+				"title": "Run Test",
+				"category": "TypeRB",
+				"icon": "$(testing-run-icon)"
+			},
+			{
+				"command": "typerb.debugTest",
+				"title": "Debug Test",
+				"category": "TypeRB",
+				"icon": "$(debug-alt)"
+			},
+			{
+				"command": "typerb.stopProject",
+				"title": "Stop Project",
+				"category": "TypeRB",
+				"icon": "$(debug-stop)"
+			}
+		],
+		"debuggers": [
+			{
+				"type": "typerb",
+				"label": "TypeRB",
+				"languages": [
+					"trb"
+				],
+				"configurationAttributes": {
+					"launch": {
+						"type": "object",
+						"properties": {
+							"config": {
+								"type": "string",
+								"description": "Path to trbconfig.jsonc. The active TypeRB project is used when omitted."
+							},
+							"args": {
+								"type": "array",
+								"description": "Arguments passed to the TypeRB program.",
+								"items": {
+									"type": "string"
+								},
+								"default": []
+							},
+							"env": {
+								"type": "object",
+								"description": "Environment variables passed to the TypeRB program.",
+								"additionalProperties": {
+									"type": "string"
+								},
+								"default": {}
+							}
+						}
+					}
+				},
+				"initialConfigurations": [
+					{
+						"type": "typerb",
+						"request": "launch",
+						"name": "Debug TypeRB"
+					}
+				],
+				"configurationSnippets": [
+					{
+						"label": "TypeRB: Debug project",
+						"description": "Debug a configured TypeRB Go project.",
+						"body": {
+							"type": "typerb",
+							"request": "launch",
+							"name": "Debug TypeRB",
+							"config": "${workspaceFolder}/trbconfig.jsonc"
+						}
+					}
+				]
+			}
+		],
+		"languages": [
+			{
+				"id": "trb",
+				"aliases": [
+					"TypeRB",
+					"trb"
+				],
+				"extensions": [
+					".trb"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "trb",
+				"scopeName": "source.trb",
+				"path": "./syntaxes/typerb.tmLanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "trb",
+				"path": "./snippets/typerb.json"
+			}
+		],
+		"configuration": {
+			"title": "TypeRB",
+			"properties": {
+				"typerb.server.path": {
+					"type": "string",
+					"default": "trb",
+					"description": "Path to the trb executable used for language services. Relative paths are resolved from the workspace folder."
+				},
+				"typerb.server.config": {
+					"type": "string",
+					"default": "",
+					"description": "Optional additional path to trbconfig.jsonc when automatic workspace discovery is not sufficient. Relative paths are resolved from the workspace folder."
+				},
+				"typerb.standalone.mode": {
+					"type": "string",
+					"enum": [
+						"go",
+						"ruby",
+						"typescript",
+						"trb"
+					],
+					"default": "go",
+					"description": "Target mode for TypeRB files that are not owned by trbconfig.jsonc."
+				},
+				"typerb.standalone.typescript.runtime": {
+					"type": "string",
+					"enum": [
+						"node",
+						"bun"
+					],
+					"default": "node",
+					"description": "Runtime for standalone TypeScript-mode files."
+				},
+				"typerb.debug.go.path": {
+					"type": "string",
+					"default": "dlv",
+					"description": "Path to the Delve executable used for source debugging in mode: go."
+				}
+			}
+		}
+	}
+}

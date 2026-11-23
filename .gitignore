@@ -1,0 +1,17 @@
+/bin/
+.DS_Store
+/.envrc
+/.local-notes
+/.trb/
+**/.trb/
+/build/
+/dist/
+**/build/
+**/dist/
+**/node_modules/
+**/.vscode-test/
+**/todo.db
+*.test
+trb_run_*
+trb-run-*/
+/dist-release/

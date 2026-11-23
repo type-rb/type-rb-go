@@ -1,0 +1,160 @@
+# Development and compiler architecture
+
+TypeRB is implemented in Go 1.27. Clone the repository and run:
+
+```sh
+go test ./...
+go vet ./...
+```
+
+## Compiler pipeline
+
+Every target uses the same phase pipeline:
+
+```text
+lossless tokens
+  -> syntax AST
+  -> resolver and type checker
+  -> typed IR
+  -> Go, Ruby, or TypeScript backend
+```
+
+Compiler phase boundaries live under `internal/ast`, `internal/checker`,
+`internal/ir`, `internal/lower`, and `internal/codegen`. Backends consume typed
+IR and do not inspect parser state or rewrite source text.
+
+Read the [language specification](specification.md) for semantics and the
+[architecture decisions](decisions/) for long-term implementation choices.
+
+## Alpha stability policy
+
+Treat every current language rule, standard-library and official-package API,
+tooling surface, generated form, and compiler-owned protocol as revisable until
+the project explicitly leaves alpha. Existing implementation is evidence about
+real use and implementation constraints, not a compatibility requirement.
+
+Choose the cleanest coherent target contract without weighing backward
+compatibility or migration cost. Do not retain an inferior shape through
+deprecated forms, compatibility aliases, shims, dual behavior, transitional
+diagnostics, or staged migrations. When a decision replaces current behavior,
+remove the old form and update every affected first-party implementation, test,
+example, and document in the same change so the repository describes only the
+new contract.
+
+Do not infer a stability-stage change from adoption, release count, or existing
+applications. Compatibility and migration policy become design constraints only
+after an explicit project decision moves TypeRB beyond alpha.
+
+## Formatter guarantees
+
+`trb fmt` parses source and uses the lossless token stream when printing. It is
+deterministic and idempotent and preserves:
+
+- standalone and trailing `#` comments;
+- quoted and interpolated strings;
+- percent literals;
+- heredoc bodies and their internal whitespace; and
+- platform DSL block parameters and literal syntax.
+
+The canonical indentation is one tab per nesting level. Indentation is not
+configurable in the current alpha.
+
+## Linter boundary
+
+`trb lint` invokes the compiler pipeline before running source-oriented rules
+from `internal/lint`. Correctness diagnostics remain owned by compiler phases
+and cannot be suppressed by lint configuration. Each built-in rule registers
+a stable ID, default level, recommended-preset membership, first release, fix
+capability, and documentation slug. Tests require the shared rule index and a
+dedicated rule page to match that registry metadata.
+
+The initial linter does not load package code or expose compiler AST state to
+third parties. Add an external rule protocol only after deterministic inputs,
+resource limits, version negotiation, and package trust are specified.
+
+## Website boundary
+
+The Pages build publishes the product landing page, user documentation, tour,
+and playground as one static site. `docs/site.json` owns documentation
+navigation and the explicit maintainer-only exclusions. All other Markdown
+under `docs/` is rendered, so a lint rule page becomes public without adding a
+second website-specific registry. The build rewrites links between published
+Markdown pages to stable directory URLs and sends links to excluded or
+repository-owned Markdown back to GitHub.
+
+Keep website generation host-only and separate from the browser compiler.
+`internal/site` owns the landing page and documentation rendering;
+`internal/playground` continues to own only the executable tour and playground
+assets. The host-only website build applies Shiki to fenced documentation code
+before publication. TypeRB fences load the canonical grammar from `syntaxes/`,
+while standard fences use Shiki's bundled grammars; published pages do not run
+a syntax-highlighting script.
+
+Install the two website tool dependencies and build the complete site with:
+
+```sh
+npm ci --prefix tools/textmate
+npm ci --prefix tools/site
+./scripts/build-site.sh dist/site
+```
+
+Pages always runs focused website, playground, grammar, and static-build
+checks. Changes limited to documentation and website-owned files skip the
+unrelated full compiler suite; `scripts/pages-full-tests-required.sh` owns that
+conservative allowlist. Any unrecognized path, an Actions workflow change, or
+a manually dispatched run keeps `go test ./...` mandatory.
+
+Selected self-contained TypeRB examples are compiled directly from their
+Markdown fences during the focused website tests. Place the HTML comment
+`<!-- trb-doc-test: stable-example-id -->` immediately before a `trb` fence to
+check it in Go, Ruby, and TypeScript modes. A target-specific example may use a
+comment such as `<!-- trb-doc-test: browser-example modes=typescript -->`.
+Add `kind=program` before `modes` when the example represents a runnable file;
+the check then also requires a top-level `def main()`.
+Keep fragments, intentionally invalid examples, and examples that depend on
+other files unmarked; those belong in a purpose-built integration fixture.
+Run the focused check with:
+
+```sh
+go test ./internal/site -run TestPublishedDocumentationExamplesCompile
+```
+
+For a multi-file tutorial backed by a repository fixture, place
+`<!-- trb-doc-file: examples/path/to/file.trb -->` immediately before the
+typed fence that reproduces the complete file. The focused site tests compare
+the fence byte-for-byte with that fixture, while a purpose-built integration
+test compiles and executes the complete project.
+
+## Development workflow
+
+Keep one grammar and portable semantics across modes. Target-specific APIs and
+compatibility behavior belong behind explicit `trb/platform/<mode>/*` imports.
+Language changes must pass through syntax AST, checked types, typed IR, and each
+affected backend.
+
+Create an issue before work that requires a language or architectural decision.
+Tasks with settled behavior can proceed as focused pull requests. Keep each PR
+narrow enough to review as one outcome, and include invalid-input diagnostics
+when the change introduces a new rule.
+
+Test the intended public phase boundaries rather than private helper structure.
+Depending on the change, this includes parsed AST shape, checker diagnostics
+and inferred types, typed IR, generated source for every affected backend,
+formatter idempotence and comment preservation, and REPL evaluation. Run the
+full Go test suite and any relevant target-toolchain checks before merging.
+
+For current gaps, see [status](status.md) and the [roadmap](roadmap.md).
+
+Releases are described in [releasing.md](releasing.md).
+
+## Documentation ownership
+
+- `language.md` teaches implemented syntax; `specification.md` defines its
+  normative semantics.
+- `learning.md` orders existing material; it does not redefine syntax or APIs.
+- `standard-library.md`, `cli.md`, and `configuration.md` are the references for
+  those public surfaces.
+- `status.md` records current capability and limitations; `roadmap.md` contains
+  future outcomes only.
+- Decision records preserve durable rationale. Scoped implementation work
+  belongs in GitHub issues rather than progress logs in this directory.

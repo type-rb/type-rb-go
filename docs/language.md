@@ -1,0 +1,1116 @@
+# Language guide
+
+TypeRB uses one grammar and one set of portable semantics in every mode. The
+mode selects code generation and package tooling, while explicit imports expose
+target-specific APIs.
+
+This guide summarizes the implemented language. The
+[specification](specification.md) is the detailed source of truth.
+
+## Program structure
+
+A runnable project contains exactly one top-level `main()` function:
+
+```trb
+def main()
+	puts("Hello from TypeRB")
+end
+```
+
+Functions and methods use `def` and `end`. Calls include parentheses. A
+function that returns no value omits the return annotation and may either fall
+through or use a bare `return`. The recommended terminal style is fallthrough;
+`trb lint --fix` removes a redundant final bare `return`:
+
+```trb
+def print_name(name: String)
+	puts(name)
+end
+```
+
+A function with an explicit return type must use a value-bearing `return` on
+every path. Final expressions are not implicit returns. Complete `if` flow and
+exhaustive enum or union `case` flow can satisfy this rule without a trailing
+return after the construct:
+
+```trb
+def label(ready: Boolean): String
+	if ready
+		return "ready"
+	else
+		return "waiting"
+	end
+end
+```
+
+A bare `*` separates positional-only parameters from named-only parameters:
+
+<!-- trb-doc-test: language-named-only -->
+```trb
+def request(
+	url: String,
+	*,
+	timeout: Integer = 30,
+	retry_count: Integer = 2,
+): String
+	return url
+end
+
+request("https://example.com", retry_count: 4)
+```
+
+Named-only parameters can be required, and named arguments may be reordered:
+
+```trb
+def connect(*, host: String, port: Integer = 443): String
+	return host + ":" + port.to_s()
+end
+
+connect(port: 8443, host: "example.com")
+```
+
+Function and method parameters are immutable bindings by default. Add `mut`
+before a parameter name only when its implementation reassigns that binding or
+uses it for a destructive operation:
+
+```trb
+def advance(mut value: Integer, *, amount: Integer = 1): Integer
+	value += amount
+	return value
+end
+```
+
+`mut` here is not `inout`: assigning another value to `value` does not assign
+that value to the caller's binding. It is not part of the function's call
+signature, so callers, interfaces, and overrides do not repeat it.
+
+Parameters before `*` cannot be supplied by name, and positional arguments
+cannot follow a named argument. Positional defaults remain available for
+naturally ordered APIs. Explicit argument expressions run left to right;
+omitted defaults run at the selected callee's entry in declaration order.
+Payload enum variants use the same `positional-only | * | named-only` boundary,
+but every payload field is required. Record construction labels are field
+labels and follow their existing record rules.
+
+Writing `: Void` on a `def` or `fn` declaration is an error; omit the return
+annotation instead. `Void` appears in function types when a stored callable
+has no result, for example `(String) -> Void`. It is not a value type: a call
+with no result may stand alone, but its expression cannot be stored, passed,
+returned as a value, or used by another expression. Use `Unit` when an
+ordinary storable value with no payload is required.
+
+Typed function values use `fn` and capture their lexical environment:
+
+```trb
+def apply(value: Integer, callable: (Integer) -> String): String
+	return callable(value)
+end
+
+prefix := "item "
+label := fn(value: Integer): String
+	return prefix + value.to_s()
+end
+```
+
+Each `fn` parameter has a type. A function value with no result omits its
+return annotation, just like `def`. Its `return` exits the function value, not
+the enclosing method. A parameter is immutable unless written with `mut`, for
+example `fn(mut value: Integer): Integer`. A function value that may return a
+recoverable error uses the same ordinary Result return in its declaration and
+type:
+
+```trb
+loader: () -> Result<String, LoadError> := fn(): Result<String, LoadError>
+	return read_name()
+end
+
+result := loader()
+```
+
+TypeScript may lower a Result-returning callback to `async` when it reaches a
+Promise-based platform API. The TypeRB signature and Result control flow remain
+the same.
+
+Outside delimiters, `;` can separate complete statements:
+
+```trb
+class Empty; end
+```
+
+`trb fmt` expands separators into canonical lines.
+
+## Imports and modes
+
+Imports are explicit and resolved before type checking:
+
+```trb
+import app/models/user
+import { UserRepo } from app/repos/user_repo
+import { Contract as ExternalContract } from acme/contracts
+import trb/std/math
+```
+
+A bare import binds one unique public declaration root whose authored name
+matches the final path segment, such as `User`, `Math`, or `JSON`. It does
+not create a lowercase package namespace or import every export. Use a named
+import for exact peer declarations and top-level functions; `as` changes only
+the local binding.
+
+The root can be a type as well as a module. A package centered on a value uses
+the actual type as its root rather than consuming the type name with a
+static-only utility namespace. For example, `trb/std/string_builder` binds the
+`StringBuilder` type that owns its factories and whose values own their instance
+operations.
+
+A declaration owner is not itself a runtime value. It may appear in a type
+position, own a member or constructor call, or be passed in a declaration-only
+metadata position explicitly supplied by a compiler provider. In an ordinary
+value position, select a member or construct a value instead. For example,
+`FileMode::Read` is a mode value, while bare `FileMode` is only its enum owner.
+Import aliases follow the same rule because aliasing does not change the
+declaration identity.
+
+Resource packages follow the same rule. `import trb/std/file` binds the opaque
+`File` type used by `File.open` and by its block parameter; it does not bind a
+module containing a second file-handle type. Source cannot construct the
+standard resource with `File.new()`. The trusted `File.open` block acquires and
+closes it. An immutable required `File` parameter borrows it for a checked
+synchronous source call; an immutable local alias shares that lifetime. It
+cannot escape through returns, fields, collections, nullable/function types,
+transparent aliases, `Any`, or first-class callbacks. Nested acquisition and
+synchronous inline iteration can borrow an outer resource; suspension and
+unverified native calls while holding it are rejected.
+
+## Choosing an operation owner
+
+TypeRB keeps one public spelling for an operation whenever the spellings would
+have the same semantics:
+
+- Use an instance method for an operation on an existing value, such as
+  `123.to_s()`, `2.5.to_i()`, `text.upcase()`, or `bytes.valid_utf8?()`.
+- Use a class member for an operation naturally associated with an actual
+  nominal type but not an existing instance. This includes constructors and
+  factories such as `StringBuilder.new()` and `File.open(path)`, and associated
+  operations such as `Dir.children(path, max_entries: 1000)`.
+- Use a module member for a domain algorithm with no natural value receiver,
+  such as `Math.sqrt(9.0)` or `JSON.decode<Value>(text)`.
+- Import an intentionally direct language or DSL operation by exact name, as
+  with `test`.
+
+Built-in receiver operations do not require utility imports, and TypeRB does
+not also expose equivalent static utility forms. Two operations may coexist
+only when their documented semantics, lifecycle, or performance differ rather
+than merely their call style. A type-associated operation does not justify
+creating a utility class when no actual nominal type exists.
+
+Explicitly listed portable-prelude bindings are a narrow language convenience,
+not static mirrors for value methods. For example, prelude `puts` and
+owner-qualified `IO.puts` intentionally reach the same output operation;
+packages do not gain similar aliases by default.
+
+Supporting declarations remain exact named imports. The initial file API uses
+the peer `FileMode` declaration rather than inventing a `File` module or
+requiring class-owned nesting:
+
+```trb
+import trb/std/file
+import { FileMode } from trb/std/file
+```
+
+`trb/std/path` exposes a genuine nominal `Path` value with `new` and receiver
+methods, plus the validated peer `RelativePath`. Host composition is
+`path.join(relative)`, not a static `Path.join` utility. See
+[path values](standard-library.md#path-values) for their distinct contracts.
+
+Portable libraries use `trb/std/*`. Target-specific APIs use
+`trb/platform/<mode>/*` and are rejected when imported from another mode:
+
+```trb
+import trb/platform/go/http
+```
+
+Compiler capabilities without a source binding use `activate`, for example
+`activate trb/platform/ruby/native`. An authored declaration import may also
+enable capabilities declared by its target, but the imported binding must
+still be used.
+
+Project package identities come from paths below `sourceDir`; source files do
+not declare target packages. External TypeRB packages also use explicit
+imports. A project may configure a short import such as `acme/contracts`; its
+lock maps that name to the canonical package identity without changing source
+syntax by target mode.
+
+Every imported declaration must be used. Each declaration named inside
+`{ ... }` is checked independently. Use `activate` instead of an unused import
+when only a compiler capability is needed.
+
+## Types and bindings
+
+Type annotations use `name: Type`. `:=` declares a local binding and infers its
+type when no annotation is present:
+
+```trb
+name := "Ada"
+count: Integer := 3
+nickname: String? := nil
+names: Array<String> := ["Ada", "Grace"]
+scores: Hash<String, Integer> := {ada: 10}
+```
+
+`nil` alone does not provide enough information to infer a binding type, so
+`value := nil` is an error. Give the binding an explicit nullable type, as in
+`value: String? := nil`. `Nil` and `Void` are compiler types and cannot be
+written as ordinary source annotations.
+
+Type names are case-sensitive and have one canonical spelling. Use
+`Integer`, `Boolean`, `String`, `Float`, `Array`, and `Hash`; aliases from
+target languages such as `Int`, `int`, `bool`, `number`, and `Map` are errors.
+User-defined types must be declared in the project or imported explicitly.
+
+Bindings declared with `:=` are immutable. Add `mut` at declaration time when
+the binding will be reassigned or used by a destructive collection operation:
+
+```trb
+mut count := 0
+count = count + 1
+
+mut names := ["Ada"]
+names.push("Grace")
+```
+
+An immutable reference cannot become mutable by assigning it to a new `mut`
+binding.
+
+The same default applies to `def` and `fn` parameters. Parameter `mut` changes
+only the binding inside that implementation and does not add caller-side
+writeback. Iterator and call-block bindings keep their current behavior while
+explicit mutable block patterns and element ownership remain under design.
+
+Compare a nullable binding with `nil` to narrow its non-`nil` path. A returning
+guard also narrows the statements that follow it:
+
+```trb
+def display_name(name: String?): String
+	if name == nil
+		return "Anonymous"
+	end
+	return name + "!"
+end
+```
+
+`nil == nil` is `true` and `nil != nil` is `false`. Equality is also the
+canonical absence test for nullable values; there is no separate `nil?()`
+method.
+
+The same narrowing is available in the matching branch of `name != nil`, in
+the remaining `elsif` or `else` path of `name == nil`, in `while`, and on the
+right side of a compatible short-circuit `&&` or `||`. A plain assignment is
+still checked against the binding's declared nullable type, but subsequent
+statements in that path use the assigned value's more precise type:
+
+```trb
+def normalized(mut name: String?): String
+	if name == nil
+		return "anonymous"
+	end
+	name = name.strip().downcase()
+	return name
+end
+```
+
+An assignment that occurs only inside a conditional, loop, or callback does
+not narrow the binding after that construct, because the path may not execute.
+
+A direct nullable record field or `readonly` class field follows the same
+rule when its receiver is a lexical binding:
+
+```trb
+def display_profile(profile: Profile): String
+	if profile.nickname == nil
+		return "Anonymous"
+	end
+	return profile.nickname
+end
+```
+
+Reassigning `profile` invalidates the field narrowing. Mutable class fields,
+indexes, calls, and chained member paths must be read into a local binding
+before narrowing.
+
+Double-quoted Strings support interpolation with `#{expression}`. The embedded
+expression must already be a non-nullable `String`; TypeRB does not inherit a
+backend's implicit conversion rules. Convert other values explicitly:
+
+<!-- trb-doc-test: language-string-interpolation -->
+```trb
+radius := 2.5
+description := "circle r=#{radius.to_s()}"
+```
+
+A nullable String must be narrowed or converted to a non-nullable String before
+it can be interpolated.
+
+Identifiers beginning with an uppercase letter are immutable constants. They
+are allowed at top level or directly inside a module or class:
+
+```trb
+API_NAME := "TypeRB"
+DEFAULT_LIMIT := 100
+```
+
+Constant initializers may be runtime expressions, but constants cannot be
+rebound or passed to destructive APIs.
+
+Local bindings declared inside methods must be used. Iterator and enum-pattern
+bindings follow the same rule. The exact name `_` discards a value and cannot
+be read. A descriptive name beginning with `_` remains readable but does not
+produce an unused-binding error:
+
+```trb
+values.each do |_value|
+	puts("tick")
+end
+
+values.each do |_value|
+	puts(_value) # _value remains readable
+end
+
+case result
+when Result::Ok(value)
+	puts(value)
+when Result::Err(_error)
+	puts("failed")
+end
+```
+
+Use `_` for a value that is intentionally inaccessible and `_name` when the
+role should remain visible or the binding may be referenced later.
+This does not make a local binding private. Leading `_` denotes privacy only on
+class members; ordinary lexical scope still distinguishes a local `_value`
+from a private `_value()` method.
+
+Method parameters, fields, constants, and top-level bindings are not rejected
+solely for being unused.
+
+### Aliases and newtypes
+
+Use `alias` for a transparent shorthand. It does not create a distinct type:
+
+```trb
+alias UserList = Array<User>
+alias LoadResult<T> = Result<T, LoadError>
+```
+
+Use `newtype` when a domain value must remain distinct even if it has the same
+representation as another value:
+
+<!-- trb-doc-test: language-newtypes -->
+```trb
+newtype UserId = Integer
+newtype ProductId = Integer
+newtype ProductIds = Array<ProductId>
+
+def load(id: UserId): UserId
+	return UserId.new(id.value())
+end
+```
+
+A newtype target may be any concrete, fully instantiated, non-nullable type.
+The declaration itself is not generic in the initial design, so
+`newtype Id<T> = T` is rejected while `newtype ProductIds = Array<ProductId>`
+is valid. Express absence outside the newtype as `UserId?`; a nullable target
+such as `newtype MaybeUserId = Integer?` is rejected.
+
+Newtypes are nominal in ordinary TypeRB code. A base value, another newtype
+with the same representation, and the newtype itself are not interchangeable.
+Construct one with `UserId.new(value)` and unwrap it with `id.value()`.
+The generated `new()` is an infallible nominal wrap after its argument passes
+ordinary type checking; it does not validate domain invariants. Keep fallible
+validation in a factory and call `new()` only after that validation succeeds.
+Underlying members are not forwarded. Two values of the same newtype support
+`==` only when their representation has portable equality.
+
+Append `do ... end` when the nominal value needs methods. Use `private new`
+when callers must go through a factory:
+
+<!-- trb-doc-test: language-closed-newtypes -->
+```trb
+newtype Label = String do
+	private new
+
+	def self.parse(source: String): Label?
+		if source.empty?()
+			return nil
+		end
+		return self.new(source)
+	end
+
+	def text(): String
+		return value()
+	end
+end
+```
+
+`Label.parse` is an ordinary class method, not an automatically called hook.
+Other factories may coexist. Only methods and lexical blocks inside this
+newtype body can call its raw `new`; nearby functions and other types cannot.
+Public `value()` is still available. A body without `private new` keeps public
+construction. Generated `new` and `value`, `initialize`, and instance fields
+cannot be defined in the body. Private authored methods use `_name` as usual.
+
+Closed newtypes must have recursively immutable representations. For example,
+String and records of immutable values work, but `Array<Label>` does not:
+mutating an aliased Array after validation would break the invariant. Open
+newtypes may still wrap mutable collections.
+
+Typed serialization and persistence boundaries may explicitly use a
+newtype's representation. The built-in JSON codecs, `trb/web` binding, Jobs
+payloads, and ORM value parameters use this rule. Other functions and package
+APIs remain nominal unless their declaration marks the same boundary.
+For a closed newtype, only outgoing projection is automatic. Generic incoming
+boundaries cannot bypass the private constructor: decode a DTO with ordinary
+representation fields, then explicitly call the domain factory. This includes
+nested closed values and incoming native callback parameters. The compiler
+does not choose or invoke a factory for you.
+
+Backend output may erase the physical wrapper while the TypeRB checker and
+typed IR retain the nominal type and authored member identity. This does not
+make handwritten target-native code unable to forge a value.
+
+## Conditions and operators
+
+Conditions must have the non-nullable `Boolean` type. TypeRB does not inherit
+truthiness rules from a target:
+
+```trb
+if count > 0
+	puts("non-empty")
+else
+	puts("empty")
+end
+```
+
+Use a conditional expression for a short two-value choice. Its condition is
+strictly Boolean, only the selected branch is evaluated, and branch types use
+the same safe common-type rule as a value-producing `if`:
+
+```trb
+label := enabled ? "enabled" : "disabled"
+predicate_label := ready?() ? "ready" : "waiting"
+```
+
+Nested conditional expressions require explicit parentheses and are usually
+clearer as a complete `if`. The formatter writes spaces around `?` and `:`.
+
+A simple early exit or loop transfer can use the conditional-transfer form:
+
+```trb
+return cached if cached != nil
+return if finished
+next if item.hidden?()
+break if complete
+```
+
+Only `return`, `next`, and `break` accept trailing `if`. TypeRB does not admit
+a general modifier form such as `notify() if ready`, and it does not add
+`unless`. The transfer value is evaluated only when its condition is true.
+
+Numeric expressions may mix `Integer` and `Float`. The `Integer` operand is
+widened to `Float`, and typed IR retains that conversion for every backend and
+the REPL. The same safe widening is available in typed initialization,
+assignment, arguments, and returns; narrowing to `Integer` remains explicit.
+Integer division truncates toward zero in every target.
+
+## Classes, interfaces, and modules
+
+```trb
+interface Named
+	name(): String
+end
+
+interface Repository<T>
+	find(id: Integer): T?
+end
+
+class User implements Named
+	readonly @id: Integer
+	@_name: String
+
+	def initialize(id: Integer, name: String)
+		@id = id
+		@_name = name
+	end
+
+	def name(): String
+		return @_name
+	end
+end
+```
+
+Instance fields are declared at class scope. Names beginning with `_` and
+`@_` are private. `readonly` fields can be assigned during initialization but
+not externally. Class methods use `def self.name()`.
+
+Every completing constructor path must initialize all fields, including paths
+that return early. Reads and compound assignments require an initialized field.
+Initialize the complete receiver before passing or capturing `self`, or calling
+its instance methods. Branches are checked separately, and assignments made only
+inside a possibly empty loop do not establish initialization after that loop.
+
+Classes support inheritance, generic interfaces, modules, class constants, and
+checked instance/class member access. Superclass construction, override rules,
+generic interface methods, and a final field/method collision rule remain alpha
+design work.
+
+Classes explicitly marked with `implements` can be passed and returned through
+that interface type. Subclasses inherit the declared conformance, while a class
+with merely matching methods does not conform implicitly. Fresh literals such
+as `values: Array<Named> := [User.new(...)]` use the expected interface element
+type; existing mutable arrays remain invariant.
+
+Generic interface arguments specialize every method in the contract. A class
+may implement a concrete application such as `Repository<User>`, or a generic
+class may pass through one of its own type parameters. Generic interfaces are
+invariant and conformance remains explicit.
+
+## Records
+
+`record` declares a closed product type for data shared across targets:
+
+```trb
+record Message
+	id: Integer
+	text: String
+	delivered: Boolean = false
+	tags: Array<String> = []
+end
+
+message := Message.new(id: 1, text: "Hello")
+```
+
+Construction is keyword-only. A required field must precede fields with
+defaults. Defaults are checked against their field type, evaluated for each
+construction in declaration order, and may refer to earlier fields. Explicit
+arguments are evaluated in source order; explicit `nil` is different from an
+omitted field. Constructor defaults do not automatically apply to JSON, ORM,
+or web decoding. Records cannot inherit. Go emits a value struct, Ruby emits
+`Data`, and TypeScript emits an interface.
+
+## Enums, raw values, and sum types
+
+TypeRB uses `enum` for two related but distinct models. An ordinary enum is a
+closed set of named values:
+
+```trb
+enum TrafficLight
+	Red
+	Yellow
+	Green
+end
+```
+
+Every member may instead bind an explicit String or Integer representation for
+storage and JSON boundaries. This is a raw-value enum: it extends the ordinary
+enumeration model rather than introducing a different runtime type.
+
+```trb
+enum OrderStatus
+	Pending = "PENDING"
+	Completed = "COMPLETED"
+
+	def terminal?(): Boolean
+		return self == OrderStatus::Completed
+	end
+end
+
+status := OrderStatus::Completed
+puts(status.terminal?())
+puts(status.raw_value())
+parsed := OrderStatus.from_raw("PENDING")
+```
+
+The enum remains a nominal `OrderStatus`; conversion is never implicit.
+`from_raw()` returns `Result<OrderStatus, EnumValueError>`. Every member of a
+raw-value enum must declare a distinct raw value of the same type.
+
+A payload enum is TypeRB's closed sum-type model. Its alternatives may carry
+different typed data, and it may mix payload-bearing and payloadless variants:
+
+<!-- trb-doc-test: language-payload-enum -->
+```trb
+enum Token
+	Text(value: String)
+	Renamed(id: Integer, *, before: String, after: String)
+	EOF
+end
+
+def describe(token: Token): String
+	case token
+	when Token::Text(value)
+		return value
+	when Token::Renamed(id, after: current, before: previous)
+		return id.to_s() + ": " + previous + " -> " + current
+	when Token::EOF
+		return "eof"
+	end
+end
+
+renamed := Token::Renamed(7, after: "new", before: "old")
+describe(renamed)
+```
+
+Enum members may carry postfix attributes after their payload or raw value.
+Attributes are inert language metadata until a compiler-integrated package
+defines their meaning. `trb/cli`, for example, uses them for
+subcommand names and descriptions.
+
+A `case` without `else` must handle every member. Payload patterns introduce
+immutable bindings with types from the variant declaration. Positional fields
+are matched in order; named-only fields are matched by label and may be
+reordered after the positional bindings. Every field must currently be bound.
+A payload enum cannot also declare raw values. `Result<T, E>` is the standard
+generic payload enum, with `Ok(value: T)` and `Err(error: E)` variants.
+
+Ordinary, raw-value, and payload enums all remain nominal, use qualified member
+names, support exhaustive `case`, and may define instance methods after their
+members. TypeRB does not add a separate `sum` declaration.
+
+User-defined generics support payload enums, transparent aliases, records,
+classes, top-level functions, and instance methods with explicit type
+arguments:
+
+<!-- trb-doc-test: language-generic-types -->
+```trb
+def identity<T>(value: T): T
+	return value
+end
+
+text := identity<String>("value")
+
+class Box<T>
+	@value: T
+
+	def initialize(value: T)
+		@value = value
+	end
+
+	def echo<U>(value: U): U
+		return value
+	end
+end
+
+box := Box<Integer>.new(1)
+label := box.echo<String>("one")
+```
+
+Generic arguments are invariant. Type-argument inference, generic interface
+methods, and generic class methods are not part of the current language.
+
+## Control-flow expressions
+
+Complete `if` and exhaustive `case` constructs can produce values. An `if`
+expression always requires `else`; a `case` expression requires either an
+`else` branch or exhaustive enum/union coverage:
+
+```trb
+label := if enabled
+	"enabled"
+else
+	"disabled"
+end
+
+short_label := enabled ? "enabled" : "disabled"
+
+description := case token
+when Token::Text(value)
+	"text: " + value
+when Token::Integer(value)
+	value.to_s()
+when Token::EOF
+	"eof"
+end
+```
+
+Each branch ends with its result expression. Earlier statements in that branch
+run before the result is evaluated. Branch types must be equivalent or have a
+safe common type such as `Float` for `Integer` and `Float`; TypeRB does not
+silently fall back to `Any` or create a new union for incompatible branches.
+A branch may instead leave its enclosing function or loop with `return`,
+`break`, or `next`. Such a branch does not participate in the common result
+type:
+
+```trb
+value := case result
+when Result::Ok(found)
+	found
+when Result::Err(error)
+	return fallback(error)
+end
+```
+
+The ordinary placement rules still apply: `return` requires a function or
+method, while `break` and `next` require a loop. The internal `Never` type used
+to model these paths is not source syntax. A `return` inside a value-producing
+collection block remains unsupported; use explicit `each` when a transformation
+needs enclosing control flow. The statement forms remain available when no
+value is needed. Prefer the conditional expression only for a short two-value
+choice; complete branch bodies remain clearer as `if`/`else`.
+
+## Literal types and discriminated unions
+
+Integer and String literals can constrain data fields. An exhaustive `case`
+on a readonly literal field narrows the complete union value:
+
+<!-- trb-doc-test: language-discriminated-union -->
+```trb
+record Created
+	status: 201
+	body: String
+end
+
+record Invalid
+	status: 422
+	body: Array<String>
+end
+
+alias Response = Created | Invalid
+
+def message(response: Response): String
+	case response.status
+	when 201
+		return response.body
+	when 422
+		return response.body[0]
+	end
+end
+```
+
+Record fields are immutable. A class field used as a discriminant must be
+`readonly`. Alternatives may share a literal, in which case that branch keeps
+their remaining union. Ordinary scalar cases are also available when no
+contract is present:
+
+```trb
+case response.status
+when 200
+	puts("ok")
+when 404
+	puts("missing")
+else
+	puts("unexpected response")
+end
+```
+
+## Arrays, hashes, and iteration
+
+Arrays and hashes are homogeneous collections. Hash keys are non-nullable
+`String` or `Integer` values in the current alpha:
+
+```trb
+numbers := [1, 2.5]                 # Array<Float>
+values := [1, "two"]                # Array<Integer | String>
+fields := {count: 1, name: "Ada"}  # Hash<String, Integer | String>
+```
+
+Literal inference retains one equivalent type, uses a safe common type such as
+Float for mixed Integer and Float values, and otherwise constructs a union.
+Narrow a scalar union with an exhaustive type case before using
+alternative-specific operations:
+
+```trb
+case fields[:count]
+when Integer(number)
+	puts(number + 1)
+when String(text)
+	puts(text)
+end
+```
+
+An unannotated fresh mutable collection is refined by its first constraining
+statement. Every write nested in that statement participates before the type
+is fixed; later statements are checked against the fixed type:
+
+```trb
+mut numbers := []
+[1, 2.5].each do |number|
+	numbers.push(number)
+end
+# numbers is Array<Float>
+
+include_name := true
+mut fields := {}
+if include_name
+	fields["value"] = 1
+else
+	fields["value"] = "unknown"
+end
+# fields is Hash<String, Integer | String>
+```
+
+A fully typed assignment, parameter, or return context can provide the type
+instead. Hash keys remain one homogeneous `String` or `Integer` type and never
+form a key union. A named function's implementation is not inspected to refine
+its caller, and a pending collection that reaches an untyped boundary or the
+end of its scope requires an explicit annotation. At the interactive REPL,
+top-level pending bindings can instead be refined by a later submission.
+
+Ordinary homogeneous collection operations remain unchanged:
+
+```trb
+mut scores: Hash<String, Integer> := {ada: 1}
+scores["grace"] = 2
+puts(scores["ada"])
+
+snapshot := scores.merge({linus: 3})
+scores.update({ada: 10})
+removed := scores.delete("grace")
+
+scores.each do |name, score|
+	puts(name + ": " + score.to_s())
+end
+```
+
+Array and String element lookup uses the single canonical strict form
+`value[index]`. Nonnegative indexes count from the start, while negative
+indexes count from the end (`-1` is the last element); lookup fails at runtime
+when the normalized position is absent. Hash lookup and deletion are strict as
+well. Safe `Result`-returning lookup is available with `try_fetch` and follows
+the same index rules. Subsequences deliberately use `slice(range)` rather than
+`value[range]`; `try_slice(range)` is its safe counterpart. Lookup failures use
+`IndexLookupError`, `SliceRangeError`, and `KeyLookupError` values from
+`trb/std/errors`. `merge` is non-destructive; `update` and `delete` require a
+`mut` receiver.
+Destructive Array operations require a `mut` binding, while `reverse` returns
+a new shallow Array:
+
+```trb
+mut values := [2, 3]
+first := values.shift()
+values.unshift(1)
+reversed := values.reverse()
+known := values.include?(2)
+position := values.index(3)
+occurrences := values.count(3)
+```
+
+Arrays are shared reference values. Copying an Array into another binding or
+passing it to a function does not copy its outer storage, so element updates
+and destructive size changes remain visible through every alias—even when
+growth reallocates storage in a target runtime:
+
+```trb
+def append_then_rebind(mut items: Array<Integer>)
+	items.push(3) # visible to the caller
+	items = []    # rebinds only this parameter
+	return
+end
+
+mut values := [1]
+mut same_values := values
+same_values.push(2)
+append_then_rebind(values)
+# values and same_values both contain [1, 2, 3]
+```
+
+`mut` authorizes mutation through a binding; it does not introduce caller-side
+writeback for binding reassignment. Operations documented as returning a new
+Array, such as `dup`, `slice`, `reverse`, sorting, transformations, `uniq`, and
+`concat`, create a distinct outer Array and remain shallow with respect to
+their elements.
+
+For an element assignment, TypeRB evaluates the Array and index once and fixes
+the nonnegative position before evaluating the right-hand side. Thus, if
+`grow(values)` appends `3` and returns `9`, starting from `[1, 2]`,
+`values[-1] = grow(values)` produces `[1, 9, 3]`. A compound assignment saves
+the old value first, so `values[-1] += grow(values)` produces `[1, 11, 3]`.
+The target must be in bounds both initially and when the write occurs; a
+right-hand-side removal can cause the final write to fail. Earlier side
+effects remain. [Array assignment rules](decisions/0014-stable-array-assignment-positions.md)
+also define short-circuit assignments and nested receivers.
+
+Membership and occurrence counting use portable `==` and are therefore
+available for numeric, Boolean, String, and payloadless enum elements. They do
+not implicitly enable target-native structural equality for nested values.
+`index(value)` uses that same equality and returns the first position as
+`Integer?`, while the block-based `find_index` remains the predicate search.
+
+Array sorting is stable and returns a new Array:
+
+```trb
+ascending := [3, 1, 2].sort()
+descending := [3, 1, 2].sort_descending()
+shortest_first := ["three", "one", "four"].sort_by do |word|
+	word.size()
+end
+```
+
+Natural ordering and `sort_by` keys currently support non-nullable `Integer`,
+`Float`, and `String`. Key expressions are evaluated exactly once per element
+and cannot use an operation that may fail. Equal values retain their original
+order, including with `sort_descending` and `sort_by_descending`.
+
+`uniq()` removes later duplicates without changing the receiver, while
+`concat()` returns a new Array in left-to-right order:
+
+```trb
+values := [3, 1, 3, 2]
+deduplicated := values.uniq()       # [3, 1, 2]
+combined := values.concat([4, 5])  # [3, 1, 3, 2, 4, 5]
+```
+
+`uniq()` uses portable `==` and retains the first occurrence. TypeRB
+`concat()` is non-destructive, unlike Ruby's `Array#concat`.
+
+Arrays, integer ranges, and hashes support structured iteration:
+
+```trb
+[1, 2, 3].each do |value|
+	puts(value)
+end
+
+(0...10).each { |index| puts(index) }
+digits := (0...10).to_a()
+
+values.each_slice(2).with_index do |slice, index|
+	puts(index)
+end
+
+scores.each do |name, score|
+	puts(name)
+	puts(score)
+end
+```
+
+`break` exits the innermost loop and `next` skips to its next iteration.
+`return` exits the enclosing function, including from an iterator block.
+Hash iteration always binds key and value separately. Its enumeration order is
+unspecified, and the entries are captured in a shallow snapshot before the
+first iteration.
+
+Value-producing collection blocks are part of the typed IR:
+
+```trb
+labels := [1, 2, 3].map do |value|
+	prefix := "item-"
+	prefix + value.to_s()
+end
+
+visible := labels.select.with_index do |label, index|
+	!label.empty?() && index < 2
+end
+
+total := [1, 2, 3].reduce(0) do |sum, value|
+	next_sum := sum + value
+	next_sum
+end
+
+has_large := [1, 20, 3].any? do |value|
+	value > 10
+end
+
+all_positive := [1, 20, 3].all? do |value|
+	value > 0
+end
+
+none_negative := [1, 20, 3].none? do |value|
+	value < 0
+end
+
+first_large := [1, 20, 3].find do |value|
+	value > 10
+end
+
+first_large_index := [1, 20, 3].find_index do |value|
+	value > 10
+end
+```
+
+These transformations currently operate on Arrays. A block may contain
+ordinary statements and must end with the expression that produces its value.
+The block locals are evaluated separately for each element. First-class `fn`
+values are available independently.
+
+Use `concurrent_map` for bounded I/O fan-out without importing a package or
+writing task-management code:
+
+```trb
+pages := urls.concurrent_map do |url|
+	fetch_page(url)
+end
+
+thumbnails := images.concurrent_map(limit: 4) do |image|
+	create_thumbnail(image)
+end
+```
+
+The result keeps input order even when element work finishes in another order.
+At most 8 element blocks are active when `limit` is omitted. An explicit
+positive `limit` changes that bound. Nested calls share the outer task group's
+capacity instead of multiplying it. The call waits for all of its child work,
+and cancellation is propagated cooperatively through supported I/O APIs.
+
+`concurrent_map` returns the block values unchanged. A block returning
+`Result<Page, FetchError>` therefore produces
+`Array<Result<Page, FetchError>>`; it does not aggregate errors. The block
+cannot assign an outer binding or capture mutable containers and class
+instances. Keep per-element mutation in values created inside the block, and
+pass shared service access through package operations that support the hidden
+execution scope. CPU parallelism is not promised.
+
+`any?`, `all?`, and `none?` short-circuit and require a non-nullable Boolean
+result. On an empty Array, they return `false`, `true`, and `true`,
+respectively. `find` and `find_index` use the same predicate and stop at the
+first match. They return a nullable element or nullable `Integer`; an empty or
+unmatched Array returns `nil`.
+
+## Result control flow
+
+`trb/std/result` provides `Result<T, E>` with `Ok` and `Err` variants:
+
+<!-- trb-doc-test: language-result-case -->
+```trb
+import trb/std/result
+
+def unwrap(result: Result<Integer, String>): Integer
+	case result
+	when Result::Ok(value)
+		return value
+	when Result::Err(_error)
+		return 0
+	end
+end
+```
+
+`Result` is an ordinary value: it can be stored, returned, and handled
+explicitly with exhaustive `case`. Prefix `try` unwraps `Ok` and returns `Err`
+from the nearest compatible Result-returning function:
+
+```trb
+def recent_posts(): DbResult<Array<Post>>
+	posts := try Post.order(created_at: :desc).limit(20).all()
+	return DbResult<Array<Post>>::Ok(posts)
+end
+```
+
+Postfix `catch` handles `Err` locally while yielding the success value on the
+ordinary path:
+
+```trb
+posts := recent_posts() catch |error|
+	puts(error.message)
+	return []
+end
+```
+
+The catch handler must produce the same success type or transfer control with a
+valid `return`, `break`, or `next`. It handles only `Result::Err`, not native
+exceptions. Standard Result values must be used with `try`, `catch`, exhaustive
+`case`, `return`, passing, or storage. At the REPL top level, a Result is shown
+as `Ok` or `Err`; top-level `try` is rejected so the session remains a stable
+inspection boundary.
+
+## Formatting
+
+The canonical indentation is one tab per nesting level. `trb fmt` preserves
+comments, literal spelling, heredoc contents, and supported platform DSL
+syntax. Formatting is deterministic and idempotent.
