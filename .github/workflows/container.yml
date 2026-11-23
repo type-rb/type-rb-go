@@ -49,7 +49,7 @@ jobs:
           set -euo pipefail
           source_version="$(sed -n 's/^var Version = "\([^"]*\)"$/\1/p' internal/cli/cli.go)"
           version="${source_version%-dev}"
-          test "$version" != "$source_version"
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-alpha\.[1-9][0-9]*)?$ ]]
           ./scripts/package-release.sh "$version" dist
           ./scripts/prepare-container-rootfs.sh "$version" dist dist/container
           printf 'version=%s\n' "$version" >> "$GITHUB_OUTPUT"
