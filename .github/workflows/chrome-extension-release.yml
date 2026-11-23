@@ -47,8 +47,7 @@ jobs:
           retention-days: 30
 
   deploy:
-    if: github.repository == 'type-rb/type-rb'
-    if: inputs.operation != 'package-only'
+    if: github.repository == 'type-rb/type-rb' && inputs.operation != 'package-only'
     needs: package
     runs-on: ubuntu-latest
     timeout-minutes: 10
