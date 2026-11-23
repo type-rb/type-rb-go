@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 // Script modules contain declarations and initializers, never an implicit call

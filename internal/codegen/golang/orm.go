@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	ormintegration "github.com/type-rb/type-rb/internal/orm"
-	"github.com/type-rb/type-rb/internal/stdlib"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	ormintegration "github.com/type-rb/type-rb-go/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (g *generator) ormWhere(call *ir.Call) string {

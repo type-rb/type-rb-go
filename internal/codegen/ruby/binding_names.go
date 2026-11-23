@@ -3,7 +3,7 @@ package ruby
 import (
 	"encoding/hex"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 // Keep portable bindings out of Ruby's keyword namespace. The TypeRB checker

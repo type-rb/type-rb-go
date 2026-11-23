@@ -7,8 +7,8 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/type-rb/type-rb/internal/stdlib"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (e *Evaluator) anchoredDirectoryBlock(invocation runtimeBlockInvocation) (Value, error) {

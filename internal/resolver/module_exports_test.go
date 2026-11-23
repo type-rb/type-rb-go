@@ -3,8 +3,8 @@ package resolver
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/parser"
 )
 
 func TestReopenedModuleExportsRetainEarlierContractsWithoutChangingSourceOrder(t *testing.T) {

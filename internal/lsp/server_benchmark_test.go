@@ -7,7 +7,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/compiler"
 )
 
 func BenchmarkServerCompletionWithLargeProjectIndex(b *testing.B) {

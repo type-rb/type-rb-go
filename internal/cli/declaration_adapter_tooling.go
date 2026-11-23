@@ -8,13 +8,13 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/type-rb/type-rb/internal/declarationadapterhost"
-	"github.com/type-rb/type-rb/internal/declarationadaptertooling"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/nativepackage"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	packageManager "github.com/type-rb/type-rb/internal/packages"
-	"github.com/type-rb/type-rb/internal/runtimeadapterhost"
+	"github.com/type-rb/type-rb-go/internal/declarationadapterhost"
+	"github.com/type-rb/type-rb-go/internal/declarationadaptertooling"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/nativepackage"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	packageManager "github.com/type-rb/type-rb-go/internal/packages"
+	"github.com/type-rb/type-rb-go/internal/runtimeadapterhost"
 )
 
 func (c *CLI) runAdapter(args []string) error {

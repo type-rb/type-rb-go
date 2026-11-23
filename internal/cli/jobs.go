@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/jobs"
-	jobssql "github.com/type-rb/type-rb/internal/jobs/sqladapter"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/jobs"
+	jobssql "github.com/type-rb/type-rb-go/internal/jobs/sqladapter"
 )
 
 type jobsInvocation struct {

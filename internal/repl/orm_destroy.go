@@ -6,8 +6,8 @@ import (
 	"errors"
 	"strconv"
 
-	ormintegration "github.com/type-rb/type-rb/internal/orm"
-	"github.com/type-rb/type-rb/internal/types"
+	ormintegration "github.com/type-rb/type-rb-go/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (e *Evaluator) ormDestroyModel(resultType types.Type, value Value) (Value, error) {

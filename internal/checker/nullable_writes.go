@@ -3,7 +3,7 @@ package checker
 import (
 	"maps"
 
-	"github.com/type-rb/type-rb/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/ast"
 )
 
 // A repeated region starts with facts valid on every backedge. Forget facts

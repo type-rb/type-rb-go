@@ -5,9 +5,9 @@ import (
 	"maps"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 // A nil state has no continuing path. Other states contain only fields assigned

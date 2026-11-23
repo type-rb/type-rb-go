@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"maps"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 // Direct Array iteration is control flow, not a closure invocation. All live

@@ -9,7 +9,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/type-rb/type-rb/internal/releasecontract"
+	"github.com/type-rb/type-rb-go/internal/releasecontract"
 )
 
 func main() {

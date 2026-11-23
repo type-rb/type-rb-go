@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/type-rb/type-rb/internal/playground"
-	"github.com/type-rb/type-rb/internal/site"
+	"github.com/type-rb/type-rb-go/internal/playground"
+	"github.com/type-rb/type-rb-go/internal/site"
 )
 
 func main() {

@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/ast"
 )
 
 func TestParseMutableMethodAndFunctionValueParameters(t *testing.T) {

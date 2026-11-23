@@ -1,4 +1,4 @@
-module github.com/type-rb/type-rb
+module github.com/type-rb/type-rb-go
 
 go 1.27
 

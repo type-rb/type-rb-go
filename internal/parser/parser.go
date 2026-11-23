@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/lexer"
-	"github.com/type-rb/type-rb/internal/stringliteral"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/lexer"
+	"github.com/type-rb/type-rb-go/internal/stringliteral"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 type Parser struct {

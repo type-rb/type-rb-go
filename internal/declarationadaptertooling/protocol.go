@@ -4,7 +4,7 @@
 // hooks.
 package declarationadaptertooling
 
-import "github.com/type-rb/type-rb/internal/diagnostic"
+import "github.com/type-rb/type-rb-go/internal/diagnostic"
 
 const ProtocolVersion = 2
 

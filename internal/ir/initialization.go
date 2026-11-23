@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/type-rb/type-rb/internal/modulegraph"
+	"github.com/type-rb/type-rb-go/internal/modulegraph"
 )
 
 type InitializationStep struct{ Module, Action string }

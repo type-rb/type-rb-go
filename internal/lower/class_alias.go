@@ -1,10 +1,10 @@
 package lower
 
 import (
-	"github.com/type-rb/type-rb/internal/checker"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/token"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/checker"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/token"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (l *lowerer) classAliasReceiver(construction checker.ClassConstruction, span token.Span) ir.Expression {

@@ -5,10 +5,10 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/packageextensionhost"
-	"github.com/type-rb/type-rb/internal/projectintegration"
-	"github.com/type-rb/type-rb/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/packageextensionhost"
+	"github.com/type-rb/type-rb-go/internal/projectintegration"
+	"github.com/type-rb/type-rb-go/internal/resolver"
 )
 
 const projectGeneratedSourcePrefix = "packageextension.project:"

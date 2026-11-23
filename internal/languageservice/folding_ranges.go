@@ -3,9 +3,9 @@ package languageservice
 import (
 	"sort"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/parser"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 // FoldingRange identifies one structural source region without exposing an

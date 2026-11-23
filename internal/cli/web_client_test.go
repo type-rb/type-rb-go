@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/compiler"
-	packageManager "github.com/type-rb/type-rb/internal/packages"
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	packageManager "github.com/type-rb/type-rb-go/internal/packages"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 func TestWebClientGeneratesTheSameTypeRBSourceAcrossBackendModes(t *testing.T) {

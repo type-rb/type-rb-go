@@ -1,6 +1,6 @@
 package parser
 
-import "github.com/type-rb/type-rb/internal/ast"
+import "github.com/type-rb/type-rb-go/internal/ast"
 
 // NormalizeRubyNativeParameters applies Ruby's untyped keyword-parameter
 // interpretation only after an explicit Ruby-native import has selected that

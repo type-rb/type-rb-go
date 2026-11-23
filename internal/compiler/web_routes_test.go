@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	webintegration "github.com/type-rb/type-rb/internal/web"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	webintegration "github.com/type-rb/type-rb-go/internal/web"
 )
 
 func TestCompileProjectAttachesWebRouteManifestToMain(t *testing.T) {

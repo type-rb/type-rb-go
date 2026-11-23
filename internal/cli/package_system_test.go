@@ -9,11 +9,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/nativepackage"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	packageManager "github.com/type-rb/type-rb/internal/packages"
-	"github.com/type-rb/type-rb/internal/project"
-	"github.com/type-rb/type-rb/internal/runtimeadapterhost"
+	"github.com/type-rb/type-rb-go/internal/nativepackage"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	packageManager "github.com/type-rb/type-rb-go/internal/packages"
+	"github.com/type-rb/type-rb-go/internal/project"
+	"github.com/type-rb/type-rb-go/internal/runtimeadapterhost"
 )
 
 func TestBuildLoadsAWSS3PackageRuntimeAdapterAcrossBackends(t *testing.T) {

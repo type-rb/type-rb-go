@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/codegen/effectplan"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/codegen/effectplan"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func validateHostPathOperations(program *ir.Program) error {

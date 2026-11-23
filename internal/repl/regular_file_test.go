@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/testsupport/regularfile"
+	"github.com/type-rb/type-rb-go/internal/testsupport/regularfile"
 )
 
 func TestEvaluateRegularFileAcquisitionAcrossModes(t *testing.T) {

@@ -17,7 +17,7 @@ import (
 
 	"github.com/creack/pty"
 	"github.com/hinshun/vt10x"
-	"github.com/type-rb/type-rb/internal/languageservice"
+	"github.com/type-rb/type-rb-go/internal/languageservice"
 )
 
 const replCompletionPTYChild = "TRB_REPL_COMPLETION_PTY_CHILD"

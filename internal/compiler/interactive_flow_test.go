@@ -3,7 +3,7 @@ package compiler
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func TestAnalyzerInvalidatesCachedInteractiveFlowAndCopiesBoundaries(t *testing.T) {

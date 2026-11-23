@@ -11,10 +11,10 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/declarationadaptertooling"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	packageManager "github.com/type-rb/type-rb/internal/packages"
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/declarationadaptertooling"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	packageManager "github.com/type-rb/type-rb-go/internal/packages"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 func (c *CLI) runAdapterTest(args []string) error {

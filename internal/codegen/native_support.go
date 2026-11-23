@@ -3,9 +3,9 @@ package codegen
 import (
 	"sort"
 
-	"github.com/type-rb/type-rb/internal/codegen/effectplan"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/nativefs"
+	"github.com/type-rb/type-rb-go/internal/codegen/effectplan"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/nativefs"
 )
 
 // SupportFile is a compiler-owned target source, not a portable source module

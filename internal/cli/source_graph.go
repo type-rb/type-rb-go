@@ -8,11 +8,11 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/parser"
-	"github.com/type-rb/type-rb/internal/resolver"
-	"github.com/type-rb/type-rb/internal/stdlib"
-	"github.com/type-rb/type-rb/internal/testsuite"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/testsuite"
 )
 
 // fileRootSource is an owned source snapshot used both to discover imports and

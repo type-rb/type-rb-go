@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/parser"
 )
 
 func TestDiscoveryIncludesPortablePlatformReceiverAndCommandContracts(t *testing.T) {

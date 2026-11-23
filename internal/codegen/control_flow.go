@@ -3,9 +3,9 @@ package codegen
 import (
 	"strconv"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/token"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/token"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 // normalizeDivergingControlFlow moves value-producing if/case expressions

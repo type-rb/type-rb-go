@@ -3,8 +3,8 @@ package codegen
 import (
 	"fmt"
 
-	"github.com/type-rb/type-rb/internal/codegen/effectplan"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/codegen/effectplan"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func anchoredIntrinsic(expression ir.Expression) string {

@@ -1,6 +1,6 @@
 package parser
 
-import "github.com/type-rb/type-rb/internal/token"
+import "github.com/type-rb/type-rb-go/internal/token"
 
 // SymbolNameOffsets exposes only token ownership to the REPL's completeness
 // scanner. Parsing an incomplete submission can still identify literal names;

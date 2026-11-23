@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (e *Evaluator) transform(node *ir.Transform, module string, sc *scope) (Value, error) {

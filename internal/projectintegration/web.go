@@ -1,10 +1,10 @@
 package projectintegration
 
 import (
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/packageextensionhost"
-	"github.com/type-rb/type-rb/internal/resolver"
-	webintegration "github.com/type-rb/type-rb/internal/web"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/packageextensionhost"
+	"github.com/type-rb/type-rb-go/internal/resolver"
+	webintegration "github.com/type-rb/type-rb-go/internal/web"
 )
 
 func init() {

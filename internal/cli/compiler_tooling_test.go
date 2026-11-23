@@ -9,9 +9,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/bootstrapsnapshot"
-	"github.com/type-rb/type-rb/internal/project"
-	"github.com/type-rb/type-rb/internal/toolingprotocol"
+	"github.com/type-rb/type-rb-go/internal/bootstrapsnapshot"
+	"github.com/type-rb/type-rb-go/internal/project"
+	"github.com/type-rb/type-rb-go/internal/toolingprotocol"
 )
 
 func TestCompilerBootstrapSnapshotEmitsTheExperimentalV2Boundary(t *testing.T) {

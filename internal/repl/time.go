@@ -9,7 +9,7 @@ import (
 	"time"
 	_ "time/tzdata"
 
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 const timeModule = "trb/std/time/index"

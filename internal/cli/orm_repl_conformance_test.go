@@ -15,7 +15,7 @@ import (
 
 	mysqldriver "github.com/go-sql-driver/mysql"
 	_ "github.com/jackc/pgx/v5/stdlib"
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/project"
 	_ "modernc.org/sqlite"
 )
 

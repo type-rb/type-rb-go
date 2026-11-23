@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/parser"
 )
 
 func TestDiscoverBuildsDeterministicFileRouteManifest(t *testing.T) {

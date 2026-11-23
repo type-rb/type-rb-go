@@ -3,8 +3,8 @@ package checker
 import (
 	"maps"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 // Flow scopes copy symbols when narrowing or assigning. Source identity keeps

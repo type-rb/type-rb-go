@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/lexer"
-	"github.com/type-rb/type-rb/internal/stringliteral"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/lexer"
+	"github.com/type-rb/type-rb-go/internal/stringliteral"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 func Parse(source []byte) (*Schema, error) {

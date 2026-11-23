@@ -12,8 +12,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/project"
-	"github.com/type-rb/type-rb/internal/target"
+	"github.com/type-rb/type-rb-go/internal/project"
+	"github.com/type-rb/type-rb-go/internal/target"
 	"golang.org/x/mod/semver"
 )
 

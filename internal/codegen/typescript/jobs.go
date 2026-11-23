@@ -4,11 +4,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/jobs"
-	jobssql "github.com/type-rb/type-rb/internal/jobs/sqladapter"
-	"github.com/type-rb/type-rb/internal/jobs/sqlstore"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/jobs"
+	jobssql "github.com/type-rb/type-rb-go/internal/jobs/sqladapter"
+	"github.com/type-rb/type-rb-go/internal/jobs/sqlstore"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (g *generator) jobsIntegrationImports(manifest *jobs.Manifest) {

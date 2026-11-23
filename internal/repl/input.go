@@ -3,9 +3,9 @@ package repl
 import (
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/lexer"
-	"github.com/type-rb/type-rb/internal/parser"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/lexer"
+	"github.com/type-rb/type-rb-go/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 // Complete reports whether source is a complete REPL submission. It uses the

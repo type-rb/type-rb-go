@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/nativepackage"
+	"github.com/type-rb/type-rb-go/internal/nativepackage"
 )
 
 const nativeRuntimeAdapterSource = `import { invoke } from github.com/acme/runtime/native

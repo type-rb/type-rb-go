@@ -3,7 +3,7 @@ package pathvalue
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/pathvalue/pathfixture"
+	"github.com/type-rb/type-rb-go/internal/pathvalue/pathfixture"
 )
 
 func TestJoinPreservesParentForBothHostGrammars(t *testing.T) {

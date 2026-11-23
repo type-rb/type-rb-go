@@ -7,9 +7,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/schemalock"
-	"github.com/type-rb/type-rb/internal/sourcemap"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/schemalock"
+	"github.com/type-rb/type-rb-go/internal/sourcemap"
 )
 
 func TestAnalyzeProjectProducesSemanticArtifactsWithoutBackendOutput(t *testing.T) {

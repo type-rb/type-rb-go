@@ -17,13 +17,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/compilerservice"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/languageservice"
-	"github.com/type-rb/type-rb/internal/parser"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/compilerservice"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/languageservice"
+	"github.com/type-rb/type-rb-go/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 func TestServerPublishesDiagnosticsAndServesCompletionAndFormatting(t *testing.T) {

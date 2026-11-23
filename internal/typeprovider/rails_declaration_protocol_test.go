@@ -7,9 +7,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/packageextension"
-	"github.com/type-rb/type-rb/internal/packageextensionhost"
-	railsprovider "github.com/type-rb/type-rb/internal/typeprovider/rails"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/packageextensionhost"
+	railsprovider "github.com/type-rb/type-rb-go/internal/typeprovider/rails"
 )
 
 func TestRailsDeclarationsCrossVersionedExtensionBoundary(t *testing.T) {

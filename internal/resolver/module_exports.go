@@ -1,6 +1,6 @@
 package resolver
 
-import "github.com/type-rb/type-rb/internal/ast"
+import "github.com/type-rb/type-rb-go/internal/ast"
 
 // Export collection sees every opening of a source namespace together, so a
 // later opening cannot discard earlier members or their owned type contracts.

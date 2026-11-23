@@ -3,9 +3,9 @@ package typescript
 import (
 	"encoding/hex"
 
-	"github.com/type-rb/type-rb/internal/codegen/naming"
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/codegen/naming"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func (g *generator) variableName(variable *ir.Variable) string {

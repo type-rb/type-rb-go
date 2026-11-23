@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 // Nested declarations are exported under their owned names rather than as

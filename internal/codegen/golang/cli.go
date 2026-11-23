@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 
-	cliapp "github.com/type-rb/type-rb/internal/cliapp"
-	"github.com/type-rb/type-rb/internal/codegen/naming"
-	"github.com/type-rb/type-rb/internal/ir"
+	cliapp "github.com/type-rb/type-rb-go/internal/cliapp"
+	"github.com/type-rb/type-rb-go/internal/codegen/naming"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 // Package-scope CLI support uses the trb__cli prefix. Source identifier

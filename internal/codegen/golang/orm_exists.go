@@ -3,7 +3,7 @@ package golang
 import (
 	"strconv"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func (g *generator) ormWhereExists(call *ir.Call, negated bool) string {

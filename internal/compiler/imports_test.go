@@ -13,8 +13,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/codegen/naming"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/codegen/naming"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 const portableMain = `import trb/std/io

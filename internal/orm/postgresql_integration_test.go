@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestPostgreSQLLiveIntrospection(t *testing.T) {

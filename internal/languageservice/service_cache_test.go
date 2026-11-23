@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestServiceReusesProjectContextForSessionUpdates(t *testing.T) {

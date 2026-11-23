@@ -3,9 +3,9 @@ package parser
 import (
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/lexer"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/lexer"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 type exprParser struct {

@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	jobsintegration "github.com/type-rb/type-rb/internal/jobs"
-	webintegration "github.com/type-rb/type-rb/internal/web"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	jobsintegration "github.com/type-rb/type-rb-go/internal/jobs"
+	webintegration "github.com/type-rb/type-rb-go/internal/web"
 )
 
 func (g *generator) integrations(extensions []ir.Extension) {

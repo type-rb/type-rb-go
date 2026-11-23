@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/identity"
 )
 
 func TestPortableFloatLiteralsAreFiniteBinary64Values(t *testing.T) {

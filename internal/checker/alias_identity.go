@@ -3,8 +3,8 @@ package checker
 import (
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/resolver"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 // A resolved alias belongs to its declaring module. Looking it up again by its

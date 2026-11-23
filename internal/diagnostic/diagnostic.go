@@ -3,7 +3,7 @@ package diagnostic
 import (
 	"fmt"
 
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 // Code is a stable, machine-readable diagnostic identifier. Messages may be

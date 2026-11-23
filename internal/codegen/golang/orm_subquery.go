@@ -3,9 +3,9 @@ package golang
 import (
 	"strconv"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	ormintegration "github.com/type-rb/type-rb/internal/orm"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	ormintegration "github.com/type-rb/type-rb-go/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (g *generator) ormSelect(call *ir.Call) string {

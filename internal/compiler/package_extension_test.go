@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func TestWebBindCallSpecializationRechecksVirtualTypeRBSourceAcrossModes(t *testing.T) {

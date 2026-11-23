@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/nativepackage"
+	"github.com/type-rb/type-rb-go/internal/nativepackage"
 )
 
 const newtypeMemberExample = `newtype Label = String do

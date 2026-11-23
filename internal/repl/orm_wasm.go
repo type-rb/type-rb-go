@@ -6,7 +6,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 // Browser playgrounds can type-check trb/orm projects, but database drivers

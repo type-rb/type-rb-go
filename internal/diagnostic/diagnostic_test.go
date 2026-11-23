@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 func TestNormalizePreservesSpecificCodesAndFillsNestedPaths(t *testing.T) {

@@ -3,7 +3,7 @@
 // are intentionally ignored by the parser.
 package schema
 
-import "github.com/type-rb/type-rb/internal/token"
+import "github.com/type-rb/type-rb-go/internal/token"
 
 type Schema struct {
 	Tables []Table

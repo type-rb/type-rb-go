@@ -16,8 +16,8 @@ import (
 
 	"github.com/reeflective/readline"
 	"github.com/reeflective/readline/inputrc"
-	"github.com/type-rb/type-rb/internal/formatter"
-	"github.com/type-rb/type-rb/internal/languageservice"
+	"github.com/type-rb/type-rb-go/internal/formatter"
+	"github.com/type-rb/type-rb-go/internal/languageservice"
 )
 
 var (

@@ -8,13 +8,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/formatter"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/repl"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/formatter"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/repl"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 const evaluationLimit = 3 * time.Second

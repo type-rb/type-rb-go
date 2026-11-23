@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
 )
 
 func TestEndpointCatalogIsVersionedAndSerializable(t *testing.T) {

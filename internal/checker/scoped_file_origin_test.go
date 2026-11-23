@@ -4,11 +4,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/checker"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/resolver"
-	"github.com/type-rb/type-rb/internal/stdlib"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/checker"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestExternalDeclarationCannotReturnScopedFileAsDirectReceiver(t *testing.T) {

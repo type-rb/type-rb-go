@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func (g *generator) timeIntrinsic(name string, call *ir.Call, arguments []string) (string, bool) {

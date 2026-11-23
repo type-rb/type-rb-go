@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 // Sequential stores preserve all entry effects and avoid target warnings for

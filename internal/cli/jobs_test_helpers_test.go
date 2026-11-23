@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 func configureSQLJobs(t *testing.T, config *project.Config, adapter, database string) {

@@ -3,12 +3,12 @@ package codegen
 import (
 	"fmt"
 
-	"github.com/type-rb/type-rb/internal/codegen/golang"
-	"github.com/type-rb/type-rb/internal/codegen/ruby"
-	"github.com/type-rb/type-rb/internal/codegen/typescript"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/sourcemap"
-	"github.com/type-rb/type-rb/internal/target"
+	"github.com/type-rb/type-rb-go/internal/codegen/golang"
+	"github.com/type-rb/type-rb-go/internal/codegen/ruby"
+	"github.com/type-rb/type-rb-go/internal/codegen/typescript"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/sourcemap"
+	"github.com/type-rb/type-rb-go/internal/target"
 )
 
 type Generated struct {

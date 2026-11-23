@@ -1,10 +1,10 @@
 package resolver
 
 import (
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/parser"
-	"github.com/type-rb/type-rb/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
 )
 
 // Standalone compilation has no project catalog. Generated operations may

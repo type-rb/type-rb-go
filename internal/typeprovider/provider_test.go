@@ -8,12 +8,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	ormintegration "github.com/type-rb/type-rb/internal/orm"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	"github.com/type-rb/type-rb/internal/packageextensionhost"
-	"github.com/type-rb/type-rb/internal/parser"
-	"github.com/type-rb/type-rb/internal/schemalock"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	ormintegration "github.com/type-rb/type-rb-go/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/packageextensionhost"
+	"github.com/type-rb/type-rb-go/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/schemalock"
 )
 
 func TestORMDeclarationsCrossVersionedExtensionBoundary(t *testing.T) {

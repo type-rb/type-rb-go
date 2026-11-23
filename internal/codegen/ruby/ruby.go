@@ -7,17 +7,17 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/codegen/effectplan"
-	"github.com/type-rb/type-rb/internal/codegen/naming"
-	"github.com/type-rb/type-rb/internal/codegen/testinspection"
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/ir"
-	jobsintegration "github.com/type-rb/type-rb/internal/jobs"
-	jobssql "github.com/type-rb/type-rb/internal/jobs/sqladapter"
-	ormintegration "github.com/type-rb/type-rb/internal/orm"
-	"github.com/type-rb/type-rb/internal/sourcemap"
-	"github.com/type-rb/type-rb/internal/types"
-	webintegration "github.com/type-rb/type-rb/internal/web"
+	"github.com/type-rb/type-rb-go/internal/codegen/effectplan"
+	"github.com/type-rb/type-rb-go/internal/codegen/naming"
+	"github.com/type-rb/type-rb-go/internal/codegen/testinspection"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	jobsintegration "github.com/type-rb/type-rb-go/internal/jobs"
+	jobssql "github.com/type-rb/type-rb-go/internal/jobs/sqladapter"
+	ormintegration "github.com/type-rb/type-rb-go/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/sourcemap"
+	"github.com/type-rb/type-rb-go/internal/types"
+	webintegration "github.com/type-rb/type-rb-go/internal/web"
 )
 
 type generator struct {

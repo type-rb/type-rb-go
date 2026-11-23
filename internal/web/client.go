@@ -8,8 +8,8 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/type-rb/type-rb/internal/formatter"
-	"github.com/type-rb/type-rb/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/formatter"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
 )
 
 const DefaultBrowserClientName = "ApiClient"

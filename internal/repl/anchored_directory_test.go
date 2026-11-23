@@ -7,10 +7,10 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/stdlib"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestEvaluateAnchoredDirectory(t *testing.T) {

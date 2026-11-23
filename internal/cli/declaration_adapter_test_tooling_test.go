@@ -8,11 +8,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/declarationadapterhost"
-	"github.com/type-rb/type-rb/internal/declarationadaptertooling"
-	"github.com/type-rb/type-rb/internal/nativepackage"
-	packageManager "github.com/type-rb/type-rb/internal/packages"
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/declarationadapterhost"
+	"github.com/type-rb/type-rb-go/internal/declarationadaptertooling"
+	"github.com/type-rb/type-rb-go/internal/nativepackage"
+	packageManager "github.com/type-rb/type-rb-go/internal/packages"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 func TestAdapterTestRunsDeclaredConformancePhases(t *testing.T) {

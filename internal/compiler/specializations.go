@@ -6,12 +6,12 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/checker"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	"github.com/type-rb/type-rb/internal/parser"
-	"github.com/type-rb/type-rb/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/checker"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/resolver"
 )
 
 func applyCallSpecializations(units []SourceUnit, programs map[string]*ast.Program, checkedPrograms map[string]checker.Result) ([]SourceUnit, []diagnostic.Diagnostic, bool, error) {

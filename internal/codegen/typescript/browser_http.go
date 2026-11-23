@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 const browserHTTPPrefix = "trb.platform.typescript.browser."

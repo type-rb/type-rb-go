@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/compiler"
 )
 
 func TestInteractiveAliasedStringBuilderAcrossModes(t *testing.T) {

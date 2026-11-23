@@ -1,9 +1,9 @@
 package golang
 
 import (
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 // Only enum payload edges that close an inline value cycle need indirection.

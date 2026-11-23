@@ -6,7 +6,7 @@ package ast
 import (
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 type Node interface {

@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/type-rb/type-rb/internal/declaration"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/declaration"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func ExportDeclarationCatalog(provider string, catalog *declaration.Catalog) (packageextension.DeclarationCatalog, error) {

@@ -3,7 +3,7 @@ package typescript
 import (
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func newtypeContractHasMethods(contract ir.TypeContract) bool {

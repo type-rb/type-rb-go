@@ -4,9 +4,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/codegen/naming"
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/codegen/naming"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 // Reopening a namespace in one source module preserves its identity. The same

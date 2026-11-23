@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/compiler"
 )
 
 const v3Program = `import { Result } from trb/std/result

@@ -5,11 +5,11 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	jobsintegration "github.com/type-rb/type-rb/internal/jobs"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	"github.com/type-rb/type-rb/internal/packageextensionhost"
-	"github.com/type-rb/type-rb/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	jobsintegration "github.com/type-rb/type-rb-go/internal/jobs"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/packageextensionhost"
+	"github.com/type-rb/type-rb-go/internal/parser"
 )
 
 func TestJobDeclarationsCrossVersionedExtensionBoundary(t *testing.T) {

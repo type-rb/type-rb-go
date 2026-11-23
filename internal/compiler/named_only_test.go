@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/callsignature"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/callsignature"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func TestNamedOnlyParametersCompileAcrossModes(t *testing.T) {

@@ -12,7 +12,7 @@ import (
 	"time"
 
 	mysqldriver "github.com/go-sql-driver/mysql"
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 func TestJobApplicationConformanceAcrossServerDatabases(t *testing.T) {

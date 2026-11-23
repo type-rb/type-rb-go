@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/declaration"
-	"github.com/type-rb/type-rb/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/declaration"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
 )
 
 const EndpointCatalogProtocolVersion = 1

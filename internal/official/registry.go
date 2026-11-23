@@ -13,7 +13,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
 )
 
 //go:embed packages

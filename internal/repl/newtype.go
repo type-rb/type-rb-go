@@ -3,7 +3,7 @@ package repl
 import (
 	"fmt"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func (e *Evaluator) newtypeMethodCall(call *ir.Call, module string, sc *scope) (Value, error) {

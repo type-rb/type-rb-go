@@ -3,9 +3,9 @@ package languageservice
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/stdlib"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestCompilerBlockParameterInferenceTypesScopedFileBinding(t *testing.T) {

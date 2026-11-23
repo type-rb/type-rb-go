@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/type-rb/type-rb/internal/compilerservice"
+	"github.com/type-rb/type-rb-go/internal/compilerservice"
 )
 
 const diagnosticDebounce = 150 * time.Millisecond

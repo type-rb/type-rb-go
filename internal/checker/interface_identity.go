@@ -3,10 +3,10 @@ package checker
 import (
 	"fmt"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/resolver"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (c *Checker) checkInterfaceMember(expression *ast.MemberExpression, receiver types.Type, class bool) types.Type {

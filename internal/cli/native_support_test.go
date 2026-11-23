@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/codegen"
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/codegen"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 func TestCompilerSupportRejectsUnsafePathsAndCollisions(t *testing.T) {

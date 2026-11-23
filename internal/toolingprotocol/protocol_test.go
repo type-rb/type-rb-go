@@ -5,9 +5,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/compilerservice"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/compilerservice"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 func TestBuildExposesAuthoredSourcesModulesAndTypedDeclarations(t *testing.T) {

@@ -17,7 +17,7 @@ import (
 	"time"
 
 	"github.com/creack/pty"
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 const shutdownJobSource = `import { Job } from trb/jobs

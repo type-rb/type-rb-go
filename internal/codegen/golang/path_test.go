@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/pathvalue/pathfixture"
+	"github.com/type-rb/type-rb-go/internal/pathvalue/pathfixture"
 )
 
 func TestHostPathCompositionBothGrammars(t *testing.T) {

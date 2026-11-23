@@ -10,10 +10,10 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/dbtool"
-	"github.com/type-rb/type-rb/internal/orm"
-	"github.com/type-rb/type-rb/internal/project"
-	"github.com/type-rb/type-rb/internal/schemalock"
+	"github.com/type-rb/type-rb-go/internal/dbtool"
+	"github.com/type-rb/type-rb-go/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/project"
+	"github.com/type-rb/type-rb-go/internal/schemalock"
 )
 
 func (c *CLI) runDatabase(args []string) error {

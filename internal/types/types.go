@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/stringliteral"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/stringliteral"
 )
 
 type Kind string

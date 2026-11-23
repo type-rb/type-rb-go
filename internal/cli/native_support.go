@@ -9,9 +9,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/codegen"
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/codegen"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/project"
 	"golang.org/x/mod/modfile"
 	"golang.org/x/mod/semver"
 )

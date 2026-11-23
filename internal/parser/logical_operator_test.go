@@ -3,7 +3,7 @@ package parser
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/ast"
 )
 
 func TestParseCanonicalLogicalOperators(t *testing.T) {

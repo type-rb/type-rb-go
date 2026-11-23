@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func TestNullableLoopChecksAndRunsInREPL(t *testing.T) {

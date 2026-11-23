@@ -9,7 +9,7 @@ import (
 	"time"
 
 	mysqldriver "github.com/go-sql-driver/mysql"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestMySQLLiveIntrospection(t *testing.T) {

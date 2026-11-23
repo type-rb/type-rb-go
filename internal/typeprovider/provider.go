@@ -12,12 +12,12 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/declaration"
-	"github.com/type-rb/type-rb/internal/declarationproviderhost"
-	"github.com/type-rb/type-rb/internal/official"
-	"github.com/type-rb/type-rb/internal/resolver"
-	"github.com/type-rb/type-rb/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/declaration"
+	"github.com/type-rb/type-rb-go/internal/declarationproviderhost"
+	"github.com/type-rb/type-rb-go/internal/official"
+	"github.com/type-rb/type-rb-go/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
 )
 
 type Context struct {

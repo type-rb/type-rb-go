@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"syscall/js"
 
-	"github.com/type-rb/type-rb/internal/playground"
+	"github.com/type-rb/type-rb-go/internal/playground"
 )
 
 var invokeFunction js.Func

@@ -4,9 +4,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
 )
 
 func (g *generator) anchoredCreateAll(call *ir.Call, arguments []string) string {

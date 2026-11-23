@@ -1,6 +1,6 @@
 package golang
 
-import "github.com/type-rb/type-rb/internal/ir"
+import "github.com/type-rb/type-rb-go/internal/ir"
 
 const oidcVerifyBearerIntrinsic = "trb.internal.auth.oidc.verify_bearer"
 

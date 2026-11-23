@@ -4,10 +4,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/callsignature"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/token"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/callsignature"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/token"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestEffectsIncludeParameterDefaultsAndNestedInitializers(t *testing.T) {

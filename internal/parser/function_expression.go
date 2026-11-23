@@ -3,8 +3,8 @@ package parser
 import (
 	"sort"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 type parsedFunctionExpression struct {

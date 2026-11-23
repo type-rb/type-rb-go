@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 func TestBuildStandaloneGoExecutableUsesFileRootGraph(t *testing.T) {

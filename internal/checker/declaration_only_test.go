@@ -4,14 +4,14 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/checker"
-	"github.com/type-rb/type-rb/internal/codegen"
-	"github.com/type-rb/type-rb/internal/declaration"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/lower"
-	"github.com/type-rb/type-rb/internal/parser"
-	"github.com/type-rb/type-rb/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/checker"
+	"github.com/type-rb/type-rb-go/internal/codegen"
+	"github.com/type-rb/type-rb-go/internal/declaration"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/lower"
+	"github.com/type-rb/type-rb-go/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/resolver"
 )
 
 func TestClassBodyDeclarationRuleIsCheckedAndOmittedByEveryBackend(t *testing.T) {

@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/declarationproviderhost"
-	"github.com/type-rb/type-rb/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/declarationproviderhost"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
 )
 
 func TestRubyFixedDeclarationProviderTypesMixinAndKeepsRuntimeLoader(t *testing.T) {

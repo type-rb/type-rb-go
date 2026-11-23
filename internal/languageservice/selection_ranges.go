@@ -4,8 +4,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/lexer"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/lexer"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 // SelectionRange describes one source selection and the next enclosing

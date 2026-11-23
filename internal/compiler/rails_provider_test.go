@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 const railsInsurersController = `activate trb/platform/ruby/rails

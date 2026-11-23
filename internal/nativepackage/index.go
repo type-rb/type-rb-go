@@ -13,8 +13,8 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/type-rb/type-rb/internal/declarationadapterhost"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/declarationadapterhost"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 const (

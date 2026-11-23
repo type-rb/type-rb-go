@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/packageextension"
-	"github.com/type-rb/type-rb/internal/stringliteral"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/stringliteral"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 const OpenAPIVersion = "3.1.0"

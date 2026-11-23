@@ -8,10 +8,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/declarationadapterhost"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/nativepackage"
-	packageManager "github.com/type-rb/type-rb/internal/packages"
+	"github.com/type-rb/type-rb-go/internal/declarationadapterhost"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/nativepackage"
+	packageManager "github.com/type-rb/type-rb-go/internal/packages"
 )
 
 func nativeComponentCatalog() *nativepackage.Catalog {

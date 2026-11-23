@@ -14,8 +14,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/project"
-	"github.com/type-rb/type-rb/internal/target"
+	"github.com/type-rb/type-rb-go/internal/project"
+	"github.com/type-rb/type-rb-go/internal/target"
 )
 
 func Sync(config *project.Config) (string, error) {

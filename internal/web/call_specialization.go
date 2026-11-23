@@ -5,7 +5,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
 )
 
 func init() {

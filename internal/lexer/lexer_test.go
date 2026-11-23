@@ -3,8 +3,8 @@ package lexer
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 func TestLexPreservesCommentsAndSpans(t *testing.T) {

@@ -3,7 +3,7 @@ package typescript
 import (
 	"strconv"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func (g *generator) rangeIterate(iteration *ir.Iterate) {

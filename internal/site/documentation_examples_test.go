@@ -11,8 +11,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 var documentationExampleMarker = regexp.MustCompile(`^<!-- trb-doc-test: ([a-z][a-z0-9-]*)(?: kind=(source|program))?(?: modes=([a-z,]+))? -->$`)

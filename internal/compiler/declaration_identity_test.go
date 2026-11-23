@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func TestModuleCallKeepsDispatchIdentityWhenTypeAliasUsesSameName(t *testing.T) {

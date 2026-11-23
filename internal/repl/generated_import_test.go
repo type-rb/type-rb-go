@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func TestRunKeepsSubmissionOffsetsWhenGeneratedImportsChange(t *testing.T) {

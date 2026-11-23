@@ -4,10 +4,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	ormintegration "github.com/type-rb/type-rb/internal/orm"
-	"github.com/type-rb/type-rb/internal/token"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	ormintegration "github.com/type-rb/type-rb-go/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/token"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestSuspensionPropagatesOnlyThroughTypeScriptProjectGeneration(t *testing.T) {

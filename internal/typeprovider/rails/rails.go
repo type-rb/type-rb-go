@@ -11,9 +11,9 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/type-rb/type-rb/internal/declaration"
-	"github.com/type-rb/type-rb/internal/typeprovider/rails/schema"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/declaration"
+	"github.com/type-rb/type-rb-go/internal/typeprovider/rails/schema"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func Load(projectRoot string) (*declaration.Catalog, error) {

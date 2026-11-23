@@ -3,7 +3,7 @@ package cli
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/testsupport/resourceborrow"
+	"github.com/type-rb/type-rb-go/internal/testsupport/resourceborrow"
 )
 
 func TestRunResourceBorrowAcrossBackends(t *testing.T) {

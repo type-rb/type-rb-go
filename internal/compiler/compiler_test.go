@@ -9,10 +9,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/sourcemap"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/sourcemap"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestCompileCarriesTypeScriptRuntimeToTypedIR(t *testing.T) {

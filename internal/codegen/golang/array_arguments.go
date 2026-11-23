@@ -3,8 +3,8 @@ package golang
 import (
 	"strconv"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 // Evaluate the receiver before its argument: Go does not order a plain variable

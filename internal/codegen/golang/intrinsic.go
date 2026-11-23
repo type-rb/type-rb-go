@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/codegen/naming"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/stringliteral"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/codegen/naming"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/stringliteral"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (g *generator) intrinsic(name string, call *ir.Call, arguments []string) string {

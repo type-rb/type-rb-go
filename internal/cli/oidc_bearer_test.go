@@ -21,7 +21,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 func TestOidcBearerAuthenticationAcrossAvailableBackends(t *testing.T) {

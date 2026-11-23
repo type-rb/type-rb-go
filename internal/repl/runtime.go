@@ -3,8 +3,8 @@ package repl
 import (
 	"errors"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 // runtimeInvocation is the typed boundary between the IR evaluator and a host

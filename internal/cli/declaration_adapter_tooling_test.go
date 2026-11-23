@@ -8,10 +8,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/declarationadaptertooling"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	packageManager "github.com/type-rb/type-rb/internal/packages"
+	"github.com/type-rb/type-rb-go/internal/declarationadaptertooling"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	packageManager "github.com/type-rb/type-rb-go/internal/packages"
 )
 
 func TestAdapterCheckEmitsDeterministicMachineReadableReport(t *testing.T) {

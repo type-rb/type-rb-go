@@ -6,11 +6,11 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/codegen/effectplan"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/modulegraph"
+	"github.com/type-rb/type-rb-go/internal/codegen/effectplan"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/modulegraph"
 )
 
 type value struct {

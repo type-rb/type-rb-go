@@ -3,7 +3,7 @@ package languageservice_test
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/languageservice"
+	"github.com/type-rb/type-rb-go/internal/languageservice"
 )
 
 func TestHighlightClassifiesTypeRBTokens(t *testing.T) {

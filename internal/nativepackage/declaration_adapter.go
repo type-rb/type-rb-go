@@ -7,10 +7,10 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/declarationadapterhost"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	"github.com/type-rb/type-rb/internal/runtimeadapterhost"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/declarationadapterhost"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/runtimeadapterhost"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 // ApplyDeclarationAdapterFiles overlays package-owned semantic declarations

@@ -4,13 +4,13 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/callsignature"
-	golang "github.com/type-rb/type-rb/internal/codegen/golang"
-	ruby "github.com/type-rb/type-rb/internal/codegen/ruby"
-	typescript "github.com/type-rb/type-rb/internal/codegen/typescript"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/token"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/callsignature"
+	golang "github.com/type-rb/type-rb-go/internal/codegen/golang"
+	ruby "github.com/type-rb/type-rb-go/internal/codegen/ruby"
+	typescript "github.com/type-rb/type-rb-go/internal/codegen/typescript"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/token"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestTopLevelEffectfulRecordConstructionUsesRootExecutionScope(t *testing.T) {

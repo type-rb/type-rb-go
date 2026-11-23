@@ -1,8 +1,8 @@
 package ruby
 
 import (
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/oidchost"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/oidchost"
 )
 
 const oidcVerifyBearerIntrinsic = "trb.internal.auth.oidc.verify_bearer"

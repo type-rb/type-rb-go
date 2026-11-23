@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/pathvalue/pathfixture"
+	"github.com/type-rb/type-rb-go/internal/pathvalue/pathfixture"
 )
 
 func TestEvaluatePathValuesAcrossModes(t *testing.T) {

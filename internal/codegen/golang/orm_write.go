@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"strings"
 
-	ormintegration "github.com/type-rb/type-rb/internal/orm"
-	"github.com/type-rb/type-rb/internal/types"
+	ormintegration "github.com/type-rb/type-rb-go/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (g *generator) ormCreateRuntime(adapter ormintegration.Adapter, model ormintegration.Model, projection []string) {

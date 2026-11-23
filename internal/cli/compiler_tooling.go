@@ -8,12 +8,12 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/type-rb/type-rb/internal/bootstrapsnapshot"
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/compilerservice"
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/target"
-	"github.com/type-rb/type-rb/internal/toolingprotocol"
+	"github.com/type-rb/type-rb-go/internal/bootstrapsnapshot"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/compilerservice"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/target"
+	"github.com/type-rb/type-rb-go/internal/toolingprotocol"
 )
 
 func (c *CLI) runCompiler(args []string) error {

@@ -1,8 +1,8 @@
 package checker
 
 import (
-	"github.com/type-rb/type-rb/internal/resolver"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 // Alias construction keeps the underlying record identity and substitutions.

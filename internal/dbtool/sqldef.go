@@ -15,8 +15,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/mysqlsource"
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/mysqlsource"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 type Operation string

@@ -26,9 +26,9 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/pathvalue"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/pathvalue"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func directoryChildPath(parent, name string) string {

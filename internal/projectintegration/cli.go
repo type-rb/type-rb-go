@@ -1,10 +1,10 @@
 package projectintegration
 
 import (
-	"github.com/type-rb/type-rb/internal/ast"
-	cliapp "github.com/type-rb/type-rb/internal/cliapp"
-	"github.com/type-rb/type-rb/internal/packageextensionhost"
-	"github.com/type-rb/type-rb/internal/resolver"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	cliapp "github.com/type-rb/type-rb-go/internal/cliapp"
+	"github.com/type-rb/type-rb-go/internal/packageextensionhost"
+	"github.com/type-rb/type-rb-go/internal/resolver"
 )
 
 func init() {

@@ -8,9 +8,9 @@ import (
 	"testing"
 
 	"github.com/reeflective/readline/inputrc"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/languageservice"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/languageservice"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func TestCompleteTracksBlocksAndDelimiters(t *testing.T) {

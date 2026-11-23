@@ -1,8 +1,8 @@
 package golang
 
 import (
-	"github.com/type-rb/type-rb/internal/ir"
-	ormintegration "github.com/type-rb/type-rb/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	ormintegration "github.com/type-rb/type-rb-go/internal/orm"
 )
 
 // goORMRuntimePlan selects one generated file per Go package to own the

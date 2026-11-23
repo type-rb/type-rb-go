@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/formatter"
+	"github.com/type-rb/type-rb-go/internal/formatter"
 )
 
 func TestStringEscapesAcrossTargetsAndREPL(t *testing.T) {

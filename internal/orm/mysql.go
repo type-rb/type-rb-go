@@ -9,8 +9,8 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/type-rb/type-rb/internal/mysqlsource"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/mysqlsource"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 type mysqlIntrospector struct{}

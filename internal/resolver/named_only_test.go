@@ -3,8 +3,8 @@ package resolver
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/callsignature"
-	"github.com/type-rb/type-rb/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/callsignature"
+	"github.com/type-rb/type-rb-go/internal/parser"
 )
 
 func TestCollectExportsPreservesNamedOnlyCallSignatures(t *testing.T) {

@@ -22,7 +22,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 // Requests use a loopback proxy, so no test hostname reaches public DNS.

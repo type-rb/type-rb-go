@@ -1,6 +1,6 @@
 package stdlib
 
-import "github.com/type-rb/type-rb/internal/types"
+import "github.com/type-rb/type-rb-go/internal/types"
 
 func timeIntrinsicSymbols() map[string]Symbol {
 	result := func(value types.Type) types.Type {

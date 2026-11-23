@@ -3,8 +3,8 @@ package official
 import (
 	"fmt"
 
-	"github.com/type-rb/type-rb/internal/stdlib"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/stdlib"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func semanticSymbols(provider string) map[string]stdlib.Symbol {

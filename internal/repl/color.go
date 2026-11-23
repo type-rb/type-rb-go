@@ -3,7 +3,7 @@ package repl
 import (
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/languageservice"
+	"github.com/type-rb/type-rb-go/internal/languageservice"
 )
 
 const (

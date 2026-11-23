@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/codegen/effectplan"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/runtimeoperation"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/codegen/effectplan"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/runtimeoperation"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 // SuspensionPlan is backend-owned analysis data. It deliberately does not

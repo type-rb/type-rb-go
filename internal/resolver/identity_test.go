@@ -3,7 +3,7 @@ package resolver
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/identity"
 )
 
 func TestBindingExposesCanonicalDeclarationAndDispatchIdentity(t *testing.T) {

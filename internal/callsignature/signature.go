@@ -2,7 +2,7 @@
 // to bind TypeRB calls across source modules, interfaces, and backends.
 package callsignature
 
-import "github.com/type-rb/type-rb/internal/types"
+import "github.com/type-rb/type-rb-go/internal/types"
 
 type ParameterKind string
 

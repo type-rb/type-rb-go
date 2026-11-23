@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/nativepackage"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/nativepackage"
 )
 
 const concurrentMapSource = `def transform(values: Array<Integer>): Array<Integer>

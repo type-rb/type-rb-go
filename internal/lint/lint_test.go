@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/diagnostic"
-	"github.com/type-rb/type-rb/internal/parser"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/parser"
 )
 
 func TestPreferConditionalTransferReportsAndFixesSimpleGuard(t *testing.T) {

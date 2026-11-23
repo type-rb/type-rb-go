@@ -23,14 +23,24 @@ jobs:
           go-version-file: go.mod
           cache: true
       - uses: ruby/setup-ruby@v1
+      - name: Install Jobs SQLite runtime dependencies
+        run: gem install --no-document sequel:5.107.0 sqlite3:2.9.5 fiddle:1.1.8
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: npm install --global typescript@7.0.2
       - uses: oven-sh/setup-bun@v2
-      - run: go test ./...
+        with:
+          bun-version: 1.4.2
+      - run: go test ./... -timeout 20m
       - name: Package and verify the Go companion
         shell: bash
         run: |
           set -euo pipefail
           version="${GITHUB_REF_NAME#v}"
           [[ "$version" =~ ^0\.5\.0-alpha\.[1-9][0-9]*$ ]]
+          source_version=$(sed -n 's/^var Version = "\([^"]*\)"$/\1/p' internal/cli/cli.go)
+          test "$source_version" = "$version"
           ./scripts/package-release.sh "$version" dist trbg
           jq -n \
             --arg version "$version" \

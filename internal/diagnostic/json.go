@@ -1,6 +1,6 @@
 package diagnostic
 
-import "github.com/type-rb/type-rb/internal/token"
+import "github.com/type-rb/type-rb-go/internal/token"
 
 const JSONSchemaVersion = 1
 

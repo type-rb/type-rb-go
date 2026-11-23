@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/declarationadapterhost"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	"github.com/type-rb/type-rb/internal/runtimeadapterhost"
+	"github.com/type-rb/type-rb-go/internal/declarationadapterhost"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/runtimeadapterhost"
 )
 
 func TestApplyDeclarationAdapterFilesAttachesPortableRuntimeFunction(t *testing.T) {

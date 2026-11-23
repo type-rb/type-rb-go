@@ -4,7 +4,7 @@ import (
 	"iter"
 	"slices"
 
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 type hashEntry struct{ Key, Value Value }

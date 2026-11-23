@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 
-	"github.com/type-rb/type-rb/internal/nativefs"
+	"github.com/type-rb/type-rb-go/internal/nativefs"
 )
 
 func (e *Evaluator) anchoredLockBlock(invocation runtimeBlockInvocation) (Value, error) {

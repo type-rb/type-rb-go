@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"strings"
 
-	ormintegration "github.com/type-rb/type-rb/internal/orm"
-	"github.com/type-rb/type-rb/internal/types"
+	ormintegration "github.com/type-rb/type-rb-go/internal/orm"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func (e *Evaluator) ormWriteIntrinsic(name string, arguments []evaluatedArgument, typ types.Type) (Value, bool, error) {

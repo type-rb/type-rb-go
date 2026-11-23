@@ -3,8 +3,8 @@ package languageservice
 import (
 	"sort"
 
-	"github.com/type-rb/type-rb/internal/lexer"
-	"github.com/type-rb/type-rb/internal/token"
+	"github.com/type-rb/type-rb-go/internal/lexer"
+	"github.com/type-rb/type-rb-go/internal/token"
 )
 
 // Highlight classifies source without adding terminal or browser formatting.

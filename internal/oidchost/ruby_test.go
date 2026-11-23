@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/testsupport/idnacorpus"
+	"github.com/type-rb/type-rb-go/internal/testsupport/idnacorpus"
 )
 
 func TestRubyUnicode17Conformance(t *testing.T) {

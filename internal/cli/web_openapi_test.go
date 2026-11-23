@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/project"
-	webintegration "github.com/type-rb/type-rb/internal/web"
+	"github.com/type-rb/type-rb-go/internal/project"
+	webintegration "github.com/type-rb/type-rb-go/internal/web"
 )
 
 func TestWebOpenAPIGeneratesTheSameDocumentAcrossModes(t *testing.T) {

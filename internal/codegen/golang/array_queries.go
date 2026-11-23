@@ -1,7 +1,7 @@
 package golang
 
 import (
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func (g *generator) arrayQueryIntrinsic(name string, call *ir.Call, arguments []string) string {

@@ -3,11 +3,11 @@ package typeprovider
 import (
 	"path/filepath"
 
-	"github.com/type-rb/type-rb/internal/ast"
-	"github.com/type-rb/type-rb/internal/declaration"
-	"github.com/type-rb/type-rb/internal/packageextension"
-	"github.com/type-rb/type-rb/internal/packageextensionhost"
-	railsprovider "github.com/type-rb/type-rb/internal/typeprovider/rails"
+	"github.com/type-rb/type-rb-go/internal/ast"
+	"github.com/type-rb/type-rb-go/internal/declaration"
+	"github.com/type-rb/type-rb-go/internal/packageextension"
+	"github.com/type-rb/type-rb-go/internal/packageextensionhost"
+	railsprovider "github.com/type-rb/type-rb-go/internal/typeprovider/rails"
 )
 
 const railsTypeProvider = "rails"

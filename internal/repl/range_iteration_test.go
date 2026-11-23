@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/type-rb/type-rb/internal/compiler"
-	"github.com/type-rb/type-rb/internal/ir"
-	"github.com/type-rb/type-rb/internal/types"
+	"github.com/type-rb/type-rb-go/internal/compiler"
+	"github.com/type-rb/type-rb-go/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/types"
 )
 
 func compileRangeSession(t *testing.T, mode, source string) (*Evaluator, *ir.Program) {

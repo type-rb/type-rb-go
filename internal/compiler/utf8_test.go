@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/diagnostic"
+	"github.com/type-rb/type-rb-go/internal/diagnostic"
 )
 
 func TestCompileRejectsInvalidUTF8AcrossModes(t *testing.T) {

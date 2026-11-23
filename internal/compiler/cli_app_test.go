@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	cliapp "github.com/type-rb/type-rb/internal/cliapp"
+	cliapp "github.com/type-rb/type-rb-go/internal/cliapp"
 )
 
 const singleBinaryCLIAppSource = `import { run } from trb/cli

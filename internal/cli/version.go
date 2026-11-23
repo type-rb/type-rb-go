@@ -8,7 +8,7 @@ import (
 	"golang.org/x/mod/semver"
 )
 
-const typeRBModulePath = "github.com/type-rb/type-rb"
+const typeRBModulePath = "github.com/type-rb/type-rb-go"
 
 func init() {
 	if build, ok := debug.ReadBuildInfo(); ok {

@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/project"
+	"github.com/type-rb/type-rb-go/internal/project"
 )
 
 func (c *CLI) buildGoFileRootExecutable(config *project.Config, graph *fileRootSourceGraph, outfile string, debug bool) error {

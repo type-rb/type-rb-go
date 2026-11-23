@@ -3,8 +3,8 @@ package compiler
 import (
 	"testing"
 
-	"github.com/type-rb/type-rb/internal/identity"
-	"github.com/type-rb/type-rb/internal/ir"
+	"github.com/type-rb/type-rb-go/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/ir"
 )
 
 func TestRecordConstructionLowersToSemanticIR(t *testing.T) {

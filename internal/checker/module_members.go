@@ -3,7 +3,7 @@ package checker
 import (
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/identity"
+	"github.com/type-rb/type-rb-go/internal/identity"
 )
 
 func (c *Checker) authoredModuleInScope(name string, sc *scope) identity.Declaration {

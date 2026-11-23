@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/type-rb/type-rb/internal/stringliteral"
+	"github.com/type-rb/type-rb-go/internal/stringliteral"
 )
 
 const DeclarationAdapterProtocolVersion = 2

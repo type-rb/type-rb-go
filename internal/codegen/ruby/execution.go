@@ -1,6 +1,6 @@
 package ruby
 
-import "github.com/type-rb/type-rb/internal/ir"
+import "github.com/type-rb/type-rb-go/internal/ir"
 
 func (g *generator) programUsesExecutionScope(statements []ir.Statement) bool {
 	for _, statement := range statements {
