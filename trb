@@ -11,7 +11,7 @@ if [ ! -x "$compiler" ]; then
   needs_build=true
 elif [ "$repository_root/go.mod" -nt "$compiler" ]; then
   needs_build=true
-elif find "$repository_root/cmd" "$repository_root/internal" -type f -name '*.go' -newer "$compiler" -print -quit | grep -q .; then
+elif find "$repository_root/cmd" "$repository_root/internal" -type f \( -name '*.go' -o -name '*.mjs' -o -name '*.cjs' \) -newer "$compiler" -print -quit | grep -q .; then
   needs_build=true
 fi
 

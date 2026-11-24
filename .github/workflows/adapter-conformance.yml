@@ -8,6 +8,8 @@ on:
       - "cmd/trb/**"
       - "go.mod"
       - "go.sum"
+      - ".node-version"
+      - ".bun-version"
       - "trb"
       - "examples/adapters/htmx/**"
       - ".github/workflows/adapter-conformance.yml"
@@ -17,6 +19,8 @@ on:
       - "cmd/trb/**"
       - "go.mod"
       - "go.sum"
+      - ".node-version"
+      - ".bun-version"
       - "trb"
       - "examples/adapters/htmx/**"
       - ".github/workflows/adapter-conformance.yml"
@@ -36,10 +40,10 @@ jobs:
           cache: true
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version-file: .node-version
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: 1.4.2
+          bun-version-file: .bun-version
       - name: Install fixed dependencies
         run: ./trb install --frozen --config examples/adapters/htmx/trbconfig.jsonc
       - name: Check and build TypeRB source

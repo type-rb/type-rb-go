@@ -17,6 +17,8 @@ on:
       - "go.mod"
       - "go.sum"
       - ".ruby-version"
+      - ".node-version"
+      - ".bun-version"
       - ".github/workflows/process-conformance.yml"
   pull_request:
     paths:
@@ -33,6 +35,8 @@ on:
       - "go.mod"
       - "go.sum"
       - ".ruby-version"
+      - ".node-version"
+      - ".bun-version"
       - ".github/workflows/process-conformance.yml"
   workflow_dispatch:
 
@@ -57,10 +61,10 @@ jobs:
       - uses: ruby/setup-ruby@v1
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version-file: .node-version
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: 1.4.2
+          bun-version-file: .bun-version
       - name: Install Process host tools
         run: |
           gem install --no-document fiddle:1.1.8

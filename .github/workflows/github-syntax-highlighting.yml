@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - ".github/workflows/github-syntax-highlighting.yml"
+      - ".node-version"
       - ".github/workflows/chrome-extension-release.yml"
       - "editors/github/**"
       - "syntaxes/**"
@@ -14,6 +15,7 @@ on:
       - main
     paths:
       - ".github/workflows/github-syntax-highlighting.yml"
+      - ".node-version"
       - ".github/workflows/chrome-extension-release.yml"
       - "editors/github/**"
       - "syntaxes/**"
@@ -35,7 +37,7 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version-file: .node-version
           cache: npm
           cache-dependency-path: editors/github/package-lock.json
 

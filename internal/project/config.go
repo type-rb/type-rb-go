@@ -17,13 +17,16 @@ import (
 const ConfigName = "trbconfig.jsonc"
 
 // DefaultGoVersion is the current Go toolchain supported by TypeRB.
-const DefaultGoVersion = "1.27"
+const DefaultGoVersion = "1.27.4"
+
+// Generated Go uses generic methods introduced in Go 1.27.
+const minimumGoVersion = "1.27"
 
 // DefaultRubyVersion is the current Ruby toolchain supported by TypeRB.
-const DefaultRubyVersion = "4.0.9"
+const DefaultRubyVersion = "4.0.10"
 
-// DefaultTypeScriptVersion follows the latest compatible TypeScript 6 patch.
-const DefaultTypeScriptVersion = "^6.0.0"
+// DefaultTypeScriptVersion pins the TypeScript release used for managed projects.
+const DefaultTypeScriptVersion = "7.0.2"
 
 // DefaultTypeScriptRuntime preserves the runtime used by TypeScript projects
 // created before runtime selection became explicit.
@@ -329,8 +332,8 @@ func (c *Config) Validate() error {
 	}
 	if c.Go != nil {
 		version := strings.TrimSpace(c.Go.Version)
-		if canonical := semver.Canonical("v" + version); canonical == "" || semver.Compare(canonical, "v"+DefaultGoVersion) < 0 {
-			return fmt.Errorf("go.version must be %s or later; got %q", DefaultGoVersion, c.Go.Version)
+		if canonical := semver.Canonical("v" + version); canonical == "" || semver.Compare(canonical, "v"+minimumGoVersion) < 0 {
+			return fmt.Errorf("go.version must be %s or later; got %q", minimumGoVersion, c.Go.Version)
 		}
 	}
 	if c.Go != nil && c.Go.Sqldef != nil {

@@ -7,7 +7,34 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"golang.org/x/mod/modfile"
 )
+
+func TestManagedProjectDefaultsMatchRegisteredToolchains(t *testing.T) {
+	for file, want := range map[string]string{
+		".ruby-version": DefaultRubyVersion, ".typescript-version": DefaultTypeScriptVersion,
+	} {
+		data, err := os.ReadFile(filepath.Join("..", "..", file))
+		if err != nil {
+			t.Fatal(err)
+		}
+		if got := strings.TrimSpace(string(data)); got != want {
+			t.Errorf("%s specifies %s, generated projects use %s", file, got, want)
+		}
+	}
+	data, err := os.ReadFile(filepath.Join("..", "..", "go.mod"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	module, err := modfile.ParseLax("go.mod", data, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if module.Go == nil || module.Go.Version != DefaultGoVersion {
+		t.Errorf("go.mod and generated projects must select Go %s", DefaultGoVersion)
+	}
+}
 
 func TestFindReportsMissingConfiguration(t *testing.T) {
 	_, err := Find(t.TempDir())
@@ -282,7 +309,7 @@ func TestExternalPackageManagement(t *testing.T) {
 
 func TestNewTypeScriptProjectUsesSupportedCompiler(t *testing.T) {
 	config := New(t.TempDir(), "typescript")
-	if got := config.DevDependencies["typescript"]; got != "^6.0.0" {
+	if got := config.DevDependencies["typescript"]; got != "7.0.2" {
 		t.Fatalf("unexpected TypeScript version: %q", got)
 	}
 	if config.TypeScript.Runtime != TypeScriptRuntimeNode || config.TypeScript.PackageManager != "npm" {

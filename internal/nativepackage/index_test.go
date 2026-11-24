@@ -363,47 +363,79 @@ func TestLoadRejectsInvalidAndCyclicNativeCacheReferences(t *testing.T) {
 	}
 }
 
-func TestGenerateModulesRejectsUnsupportedTypeScriptMajor(t *testing.T) {
+func TestGenerateModulesRejectsUnqualifiedTypeScriptRelease(t *testing.T) {
 	if _, err := exec.LookPath("node"); err != nil {
 		t.Skip("node is required for the TypeScript indexer diagnostic")
 	}
+	for _, version := range []string{"6.0.3", "7.0.1"} {
+		t.Run(version, func(t *testing.T) {
+			root := t.TempDir()
+			typeScriptRoot := filepath.Join(root, "node_modules", "typescript")
+			if err := os.MkdirAll(typeScriptRoot, 0o755); err != nil {
+				t.Fatal(err)
+			}
+			js := fmt.Sprintf("module.exports = {version: %q}", version)
+			if err := os.WriteFile(filepath.Join(typeScriptRoot, "index.js"), []byte(js), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			_, err := GenerateModules(root, "npm", map[string]string{"ui": "1.0.0"}, []string{"ui"})
+			if err == nil || !strings.Contains(err.Error(), "requires TypeScript 7.0.2; found "+version) {
+				t.Fatalf("unexpected TypeScript compatibility diagnostic: %v", err)
+			}
+		})
+	}
+}
+
+func TestTypeScriptIndexerReadsMappedPropsAndDOMFile(t *testing.T) {
+	tsc, err := exec.LookPath("tsc")
+	if err != nil {
+		t.Skip("tsc is required for declaration indexing")
+	}
+	tsc, err = filepath.EvalSymlinks(tsc)
+	if err != nil {
+		t.Fatal(err)
+	}
 	root := t.TempDir()
-	typeScriptRoot := filepath.Join(root, "node_modules", "typescript")
-	if err := os.MkdirAll(typeScriptRoot, 0o755); err != nil {
-		t.Fatal(err)
-	}
-	packageJSON := `{"name":"typescript","version":"7.0.2","main":"index.cjs"}`
-	if err := os.WriteFile(filepath.Join(typeScriptRoot, "package.json"), []byte(packageJSON), 0o644); err != nil {
-		t.Fatal(err)
-	}
-	if err := os.WriteFile(filepath.Join(typeScriptRoot, "index.cjs"), []byte(`module.exports = { version: "7.0.2" };`), 0o644); err != nil {
-		t.Fatal(err)
-	}
-	_, err := GenerateModules(root, "npm", map[string]string{"ui": "1.0.0"}, []string{"ui"})
-	if err == nil || !strings.Contains(err.Error(), `supports TypeScript 6.x; found 7.0.2`) || !strings.Contains(err.Error(), `"^6.0.0"`) {
-		t.Fatalf("unexpected TypeScript compatibility diagnostic: %v", err)
-	}
-}
-
-func TestTypeScriptIndexerUsesSyntaxNodesForSyntheticSymbols(t *testing.T) {
-	if strings.Contains(typeScriptIndexer, "declaration || containingFile") {
-		t.Fatal("native TypeScript indexer passes a file path where the compiler API requires a syntax node")
-	}
-	if !strings.Contains(typeScriptIndexer, "fallbackNode: source") || !strings.Contains(typeScriptIndexer, "declaration || state.fallbackNode") {
-		t.Fatal("native TypeScript indexer does not retain a source-file fallback for synthetic symbols")
-	}
-	if !strings.Contains(typeScriptIndexer, "checker.getTypeOfPropertyOfType(alternative, name)") {
-		t.Fatal("native TypeScript indexer does not resolve declarationless object properties from their containing type")
-	}
-}
-
-func TestTypeScriptIndexerRecognizesTheDOMFileBoundary(t *testing.T) {
-	for _, want := range []string{
-		`name === "File" && sourceLooksDOM(symbol)`,
-		`return wire("named", "File")`,
+	dependencies := filepath.Join(root, "node_modules")
+	for name, declaration := range map[string]string{
+		"@types/react": "export interface ReactElement { key: string }",
+		"ui": `import type { ReactElement } from "react";
+			type Fields = { label: string; file: File };
+			export declare function Widget(props: Partial<Fields>): ReactElement;
+			export declare function upload(file: File): void;`,
 	} {
-		if !strings.Contains(typeScriptIndexer, want) {
-			t.Fatalf("native TypeScript indexer is missing the DOM File boundary %q", want)
+		directory := filepath.Join(dependencies, name)
+		if err := os.MkdirAll(directory, 0o755); err != nil {
+			t.Fatal(err)
 		}
+		if err := os.WriteFile(filepath.Join(directory, "index.d.ts"), []byte(declaration), 0o644); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := os.Symlink(filepath.Dir(filepath.Dir(tsc)), filepath.Join(dependencies, "typescript")); err != nil {
+		t.Fatal(err)
+	}
+	for _, manager := range []string{"npm", "bun"} {
+		t.Run(manager, func(t *testing.T) {
+			if manager == "bun" {
+				if _, err := exec.LookPath("bun"); err != nil {
+					t.Skip("Bun is required for this runtime")
+				}
+			}
+			catalog, err := Generate(root, manager, map[string]string{"ui": "1.0.0"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			module := catalog.Modules["ui"]
+			upload := module.Exports["upload"]
+			if len(upload.Parameters) != 1 || upload.Parameters[0].Name != "File" {
+				t.Fatalf("expected a DOM File parameter, got %#v", module)
+			}
+			props := module.Records["Native_ui_WidgetProps"].Fields
+			if len(props) != 2 || props[0].Name != "file" || props[0].Type.Name != "File" ||
+				props[1].Name != "label" || props[1].Type.Name != "String" || !props[0].Optional || !props[1].Optional {
+				t.Fatalf("unexpected mapped properties: %#v", module)
+			}
+		})
 	}
 }
