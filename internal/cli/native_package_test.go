@@ -243,7 +243,7 @@ func TestInstallAppliesTypeRBPackageDeclarationAdapter(t *testing.T) {
 	if err := os.MkdirAll(bin, 0o755); err != nil {
 		t.Fatal(err)
 	}
-	indexerOutput := `{"typescriptVersion":"6.0.3","modules":{"ui":{"exports":{},"unsupported":{"Button":"uses a conditional type","identity":"uses generic call signatures"}}}}`
+	indexerOutput := `{"typescriptVersion":"7.0.2","modules":{"ui":{"exports":{},"unsupported":{"Button":"uses a conditional type","identity":"uses generic call signatures"}}}}`
 	node := filepath.Join(bin, "node")
 	if err := os.WriteFile(node, []byte("#!/bin/sh\nprintf '%s' '"+indexerOutput+"'\n"), 0o755); err != nil {
 		t.Fatal(err)

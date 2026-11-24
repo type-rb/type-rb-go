@@ -1,7 +1,7 @@
 # htmx attribute conformance
 
 This integration fixture uses `htmx.org` **4.0.0**, React **19.3.0**, and
-TypeScript **6.0.3**. It is a bounded example, not a published compatibility
+TypeScript **7.0.2**. It is a bounded example, not a published compatibility
 package or a promise to support every htmx API. The upstream
 [release announcement](https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released)
 and [installation guide](https://four.htmx.org/docs) describe this version.

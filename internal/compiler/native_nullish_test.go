@@ -195,7 +195,7 @@ func TestNativeNullishFunctionValuesRequireExplicitWrapper(t *testing.T) {
 	}
 }
 
-// This integration runs with TypeScript 6 in the native-package workflow. The
+// This integration runs with the registered TypeScript compiler in the native-package workflow. The
 // ordinary compiler suite also checks lowering with its target tsc version.
 func TestNativeNullishIndexAndCalls(t *testing.T) {
 	tsc, err := exec.LookPath("tsc")
@@ -206,8 +206,8 @@ func TestNativeNullishIndexAndCalls(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !strings.HasPrefix(string(version), "Version 6.") {
-		t.Skip("native indexing requires TypeScript 6")
+	if strings.TrimSpace(string(version)) != "Version 7.0.2" {
+		t.Fatalf("native indexing requires TypeScript 7.0.2; found %s", version)
 	}
 	tsc, err = filepath.EvalSymlinks(tsc)
 	if err != nil {

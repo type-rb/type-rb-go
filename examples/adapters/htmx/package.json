@@ -16,6 +16,6 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "playwright": "1.63.0",
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   }
 }

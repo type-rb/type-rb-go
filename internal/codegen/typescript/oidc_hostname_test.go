@@ -14,7 +14,7 @@ func TestOidcUnicode17Conformance(t *testing.T) {
 		t.Skip("npm unavailable")
 	}
 	root := t.TempDir()
-	module := `{"private":true,"type":"module","dependencies":{"tr46":"6.0.0","punycode":"2.3.1","@types/tr46":"5.0.1","typescript":"^6.0.0"}}`
+	module := `{"private":true,"type":"module","dependencies":{"tr46":"6.0.0","punycode":"2.3.1","@types/tr46":"5.0.1","typescript":"7.0.2"}}`
 	source := tsOidcHostnameRuntime + `
 import { createInterface } from "node:readline";
 const lines = createInterface({ input: process.stdin });

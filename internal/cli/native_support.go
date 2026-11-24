@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"cmp"
 	"errors"
 	"fmt"
 	"os"
@@ -76,7 +77,7 @@ func writeGoModuleDependencies(config *project.Config, root string, dependencies
 		if config.Go == nil || config.Go.Module == "" {
 			return errors.New("compiler support requires a Go module")
 		}
-		data = []byte(fmt.Sprintf("module %s\n\ngo %s\n", config.Go.Module, project.DefaultGoVersion))
+		data = []byte(fmt.Sprintf("module %s\n\ngo %s\n", config.Go.Module, cmp.Or(config.Go.Version, project.DefaultGoVersion)))
 	} else if err != nil {
 		return err
 	}

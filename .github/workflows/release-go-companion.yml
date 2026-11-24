@@ -27,11 +27,11 @@ jobs:
         run: gem install --no-document sequel:5.107.0 sqlite3:2.9.5 fiddle:1.1.8
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
-      - run: npm install --global typescript@7.0.2
+          node-version-file: .node-version
+      - run: npm install --global "typescript@$(cat .typescript-version)"
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: 1.4.2
+          bun-version-file: .bun-version
       - run: go test ./... -timeout 20m
       - name: Package and verify the Go companion
         shell: bash

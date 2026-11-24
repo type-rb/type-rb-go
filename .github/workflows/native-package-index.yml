@@ -20,11 +20,11 @@ jobs:
           go-version-file: go.mod
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version-file: .node-version
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: 1.4.2
+          bun-version-file: .bun-version
       - name: Install the native declaration compiler
-        run: npm install --global typescript@6.0.3
+        run: npm install --global "typescript@$(cat .typescript-version)"
       - name: Check indexed native nullish calls
-        run: go test -v ./internal/compiler ./internal/nativepackage -run 'TestNativeNullish|TestNativeNil|TestLoadRejectsInvalidAndCyclicNativeCacheReferences'
+        run: go test -v ./internal/compiler ./internal/nativepackage -run 'TestNativeNullish|TestNativeNil|TestTypeScriptIndexerReadsMappedPropsAndDOMFile|TestGenerateModulesRejectsUnqualifiedTypeScriptRelease|TestLoadRejectsInvalidAndCyclicNativeCacheReferences'

@@ -63,7 +63,7 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version-file: .node-version
           cache: npm
           cache-dependency-path: |
             tools/textmate/package-lock.json
@@ -71,12 +71,12 @@ jobs:
 
       - name: Install TypeScript compiler
         if: steps.test-scope.outputs.full-tests == 'true'
-        run: npm install --global typescript@7.0.2
+        run: npm install --global "typescript@$(cat .typescript-version)"
 
       - uses: oven-sh/setup-bun@v2
         if: steps.test-scope.outputs.full-tests == 'true'
         with:
-          bun-version: 1.4.2
+          bun-version-file: .bun-version
 
       - name: Verify compiler and tour
         if: steps.test-scope.outputs.full-tests == 'true'

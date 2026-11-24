@@ -1,5 +1,5 @@
 ARG TYPERB_VERSION=latest
-ARG GO_VERSION=1.27
+ARG GO_VERSION=1.27.4
 
 FROM ghcr.io/type-rb/trb:${TYPERB_VERSION} AS typerb
 
