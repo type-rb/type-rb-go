@@ -6,10 +6,10 @@ TypeRB example: the current router, instance navigation, and `Outlet`.
 
 The native dependency is pinned to `@tanstack/react-router` 1.170.29. Revalidate
 the adapter and its generated TypeScript before changing that version.
-The conformance project enables `skipLibCheck` because that release contains
-an internal declaration-file error under TypeScript 6.0.3. Strict checking of
-the generated application remains enabled; only errors wholly inside dependency
-`.d.ts` files are skipped.
+TypeScript 7.0.2 reports a missing `__beforeLoadContext` property on
+`MakeRouteMatch` in the installed `@tanstack/router-core` declarations.
+The conformance project enables `skipLibCheck` for dependency declarations
+and checks the generated application with `strict` enabled.
 
 From a TypeRB source checkout, validate the package-owned catalog with:
 
