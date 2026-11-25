@@ -12,10 +12,10 @@ trbg --version
 
 Prebuilt binaries and checksums are also available from
 [GitHub Releases](https://github.com/type-rb/type-rb-go/releases). To install
-the exact v0.5.0-alpha.1 version from Go source:
+the exact v0.5.0-alpha.2 version from Go source:
 
 ```sh
-git clone --branch v0.5.0-alpha.1 --single-branch https://github.com/type-rb/type-rb-go.git
+git clone --branch v0.5.0-alpha.2 --single-branch https://github.com/type-rb/type-rb-go.git
 cd type-rb-go
 go install ./cmd/trbg
 ```
