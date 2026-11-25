@@ -51,7 +51,7 @@ import (
 // linker flag while local and branch source builds retain a useful development
 // version. A tagged module installation resolves its version from Go build
 // information in version.go.
-var Version = "0.5.0-alpha.1"
+var Version = "0.5.0-alpha.2"
 
 type buildArtifactKind string
 

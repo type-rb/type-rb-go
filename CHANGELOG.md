@@ -1,6 +1,13 @@
 # Changelog
 
-This file records user-visible changes in stable TypeRB releases.
+This file records user-visible changes in TypeRB releases.
+
+## 0.5.0-alpha.2 - 2026-11-25
+
+- The Go compiler remains available as `trbg` for Go, Ruby, and TypeScript
+  source workflows alongside the matching Native release.
+- The TypeScript toolchain pin is now 7.0.2. The Router guide documents the
+  declaration generation error that can occur with that toolchain.
 
 ## 0.4.11 - 2026-10-01
 
